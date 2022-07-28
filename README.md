@@ -91,25 +91,13 @@ export DRONE_SERVER_URL="http://${DRONE_SERVER_HOST}"
 
 ## Deploy Drone
 
-## Configure Gitea
-
-Configure Gitea for oAuth to be used by Drone and the demo repository that will be clone from GitHub,
+### Configure Gitea oAuth App and Default Repos
 
 ```shell
-$PROJECT_HOME/bin/gitea-config-darwin-arm64 \
-  -g "${GITEA_URL}" \
-  -dh "${DRONE_SERVER_URL}"
+kustomize build k8s/gitea-config | ko resolve -f - | kubectl apply -f -
 ```
 
-**NOTE**: Please use the right `gitea-config` binary that suits your environment. In the example above we use the macOS binary
-
-Deploy Drone,
-
-Create namespace to deploy drone
-
-```shell
-kubectl create ns drone
-```
+### Drone Server
 
 Add drone helm repo,
 

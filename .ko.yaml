@@ -1,7 +1,11 @@
 builds:
-- id: oauth
-  dir: ./cmd
+- id: oauth-app
+  dir: cmd
   main: oauth-app
+  env:
+    - CGO_ENABLED=0
   ldflags:
   - -s
   - -w
+  flags:
+    - -mod=vendor
