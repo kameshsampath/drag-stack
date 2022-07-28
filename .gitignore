@@ -1,0 +1,7 @@
+**/.env*
+secret*
+!bin
+k8s.code-workspace
+gitea-config
+k8s/drone.yaml
+NOTES.txt

@@ -1,0 +1,12 @@
+server:
+  extraArgs: 
+    - --insecure
+  service:
+     type: NodePort
+     servicePortHttp: 8080
+     servicePortHttps: 8443
+configs:
+  secret:
+    # htpasswd -nbBC 10 "" $ARGO_ADMIN_PASSWORD | tr -d ':\n' | sed 's/$2y/$2a/'
+    # Password Value is demo@123
+    argocdServerAdminPassword: "$2a$10$/hp1NShyikOaiq4VCLJOwu3tK9J1iOJTgdmdU6lK2io28LUXkbanG"

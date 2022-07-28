@@ -1,0 +1,7 @@
+builds:
+- id: oauth
+  dir: ./cmd
+  main: oauth-app
+  ldflags:
+  - -s
+  - -w
