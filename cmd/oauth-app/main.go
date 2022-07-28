@@ -1,17 +1,18 @@
 package main
 
 import (
+	"context"
 	"crypto/rand"
 	"encoding/hex"
-	"errors"
 	"flag"
 	"fmt"
-	"io/ioutil"
 	"log"
-	"os"
-	"path"
 
 	"code.gitea.io/sdk/gitea"
+	apiv1 "k8s.io/api/core/v1"
+	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+	"k8s.io/client-go/kubernetes"
+	"k8s.io/client-go/rest"
 )
 
 var (
@@ -20,9 +21,7 @@ var (
 	giteaAdminPassword string
 	giteaAdminUser     string
 	giteaUrl           string
-	giteaRepoName      string
-	githubTemplateRepo string
-	repoNotExists      = errors.New("404 Not Found")
+	namespace          string
 )
 
 func main() {
@@ -31,7 +30,8 @@ func main() {
 	flag.StringVar(&droneHostURL, "dh", "http://drone-127.0.0.1.sslip.io:8080", "The Drone Host URL")
 	flag.StringVar(&giteaAdminUser, "u", "demo", "The Gitea admin username")
 	flag.StringVar(&giteaAdminPassword, "p", "demo@123", "The Gitea admin user password")
-	flag.StringVar(&giteaUrl, "g", "http://gitea.default:3000", "The Gitea URL")
+	flag.StringVar(&giteaUrl, "g", "http://gitea-http.default:3000", "The Gitea URL")
+	flag.StringVar(&namespace, "n", "drone", "The kubernetes namespace where to create the oauth client secret")
 	flag.Parse()
 
 	c, err := gitea.NewClient(giteaUrl)
@@ -56,18 +56,41 @@ func main() {
 	}
 
 	if !appExists {
+		log.Println("Creating new oAuth App")
 		o, _, err := c.CreateOauth2(gitea.CreateOauth2Option{
 			RedirectURIs: []string{fmt.Sprintf("%s/login", droneHostURL)},
 			Name:         oAuthAppName})
 		if err != nil {
 			log.Fatalln(err)
 		}
-		cwd, _ := os.Getwd()
 		sec, _ := randomHex(16)
-		ioutil.WriteFile(path.Join(cwd, "k8s", ".env"), []byte(fmt.Sprintf(`DRONE_GITEA_CLIENT_ID=%s
-DRONE_GITEA_CLIENT_SECRET=%s
-DRONE_RPC_SECRET=%s
-`, o.ClientID, o.ClientSecret, sec)), 0600)
+
+		config, err := rest.InClusterConfig()
+		if err != nil {
+			log.Fatalln(err)
+		}
+		log.Println("Got InCluster Config")
+
+		clientset, err := kubernetes.NewForConfig(config)
+		if err != nil {
+			log.Fatalln(err)
+		}
+		log.Println("Got Client Set")
+
+		_, err2 := clientset.CoreV1().Secrets(namespace).Create(context.TODO(), &apiv1.Secret{
+			ObjectMeta: metav1.ObjectMeta{
+				Name: fmt.Sprintf("%s-secret", oAuthAppName),
+			},
+			StringData: map[string]string{
+				"DRONE_GITEA_CLIENT_ID":     o.ClientID,
+				"DRONE_GITEA_CLIENT_SECRET": o.ClientSecret,
+				"DRONE_RPC_SECRET":          sec,
+			},
+		}, metav1.CreateOptions{})
+
+		if err2 != nil {
+			log.Fatalln(err2)
+		}
 		log.Printf("Successfully created oAuth application %s", oAuthAppName)
 	} else {
 		log.Printf("\noAuth app %s already exists, updating", oAuthAppName)

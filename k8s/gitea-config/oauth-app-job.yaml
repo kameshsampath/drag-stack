@@ -7,10 +7,12 @@ spec:
     spec:
       containers:
       - name: gitea-configurer
-        image: ko://github.com/kameshsampath/dag/cmd/oauth-app/main.go
-        command: 
+        image: ko://github.com/kameshsampath/dag/cmd/oauth-app   
+        args: 
           - "-a=dag-demos"
+          - "-n=drone"
       restartPolicy: Never
-  backoffLimit: 4
+      serviceAccountName: gitea-configurer
+  backoffLimit: 0
 
 

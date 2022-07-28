@@ -1,4 +1,8 @@
-namespace: default
+namespace: drone
 
 resources:
+  - "namespace.yaml"
+  - "sa.yaml"
+  - "role.yaml"
+  - "role-binding.yaml"
   - "oauth-app-job.yaml"

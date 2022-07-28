@@ -1,0 +1,14 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: gitea-configurer
+  namespace: drone
+subjects:
+- kind: ServiceAccount
+  name: gitea-configurer
+  apiGroup: ""
+  namespace: drone
+roleRef:
+  kind: Role
+  name: gitea-configurer
+  apiGroup: rbac.authorization.k8s.io
