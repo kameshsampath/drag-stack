@@ -6,3 +6,4 @@ gitea-config
 k8s/drone.yaml
 NOTES.txt
 !k8s/gitea-config
+!.envrc
