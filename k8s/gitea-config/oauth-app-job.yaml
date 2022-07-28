@@ -1,0 +1,16 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: gitea-oauth-add
+spec:
+  template:
+    spec:
+      containers:
+      - name: gitea-configurer
+        image: ko://github.com/kameshsampath/dag/cmd/oauth-app/main.go
+        command: 
+          - "-a=dag-demos"
+      restartPolicy: Never
+  backoffLimit: 4
+
+
