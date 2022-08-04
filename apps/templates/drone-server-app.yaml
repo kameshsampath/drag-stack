@@ -35,7 +35,7 @@ spec:
         extraSecretNamesForEnvFrom:
           # all the other as $PROJECT_HOME/k8s/.env variables are loaded via this secret
           # https://docs.drone.io/server/reference/
-          - {{ .Values.spec.gitea.oAuth.secret }}
+          - {{ .Values.spec.gitea.oAuthSecret }}
 
         env:
           # the Drone server host typically what the drone runners will use to 
