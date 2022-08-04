@@ -1,8 +1,15 @@
+global:
+  hostAliases:
+   - ip: "${GITEA_HTTP_CLUSTER_IP}"
+     hostnames:
+       - gitea-127.0.0.1.sslip.io
 server:
   extraArgs: 
     - --insecure
   service:
      type: NodePort
+     nodePortHttp: 30080
+     nodePortHttps: 30443
      servicePortHttp: 8080
      servicePortHttps: 8443
 configs:

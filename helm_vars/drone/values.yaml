@@ -9,7 +9,7 @@ service:
 extraSecretNamesForEnvFrom:
    # all the other as $PROJECT_HOME/k8s/.env variables are loaded via this secret
    # https://docs.drone.io/server/reference/
-  - drone-demos-secret
+  - dag-demos-secret
 
 env:
   # the Drone server host typically what the drone runners will use to 

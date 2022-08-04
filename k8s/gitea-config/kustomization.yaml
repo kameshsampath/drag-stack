@@ -1,8 +1,7 @@
-namespace: drone
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
 
+namespace: drone
 resources:
-  - "namespace.yaml"
-  - "sa.yaml"
-  - "role.yaml"
-  - "role-binding.yaml"
-  - "oauth-app-job.yaml"
+- https://github.com/kameshsampath/drone-tutorial-gitea-helper/blob/main/manifests/install.yaml
+## add your overrides

@@ -20,12 +20,12 @@ gitea:
       # for this demo we will use http protocol to access Git repos
       PROTOCOL: http
       # the port gitea will listen on
-      HTTP_PORT: 3000
+      HTTP_PORT: 30950
       # the Git domain - all the repositories will be using this domain
       DOMAIN: gitea-127.0.0.1.sslip.io
       # The clone base url e.g. if repo is demo/foo the clone url will be 
       # http://gitea-127.0.0.1.sslip.io:3000/demo/foo
-      ROOT_URL: http://gitea-127.0.0.1.sslip.io:3000/
+      ROOT_URL: http://gitea-127.0.0.1.sslip.io:30950/
     webhook:
       # since we will deploy to local network we will allow all hosts
       ALLOWED_HOST_LIST: "*"

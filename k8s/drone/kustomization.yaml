@@ -1,13 +1,8 @@
-secretGenerator:
-  - name: drone-demos-secret
-    envs:
-      - .env
-
 generatorOptions:
   disableNameSuffixHash: true
 
 resources:
-  - drone.yaml
+  - all.yaml
 
 patches:
   - patch: |-

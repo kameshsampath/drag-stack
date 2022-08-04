@@ -23,13 +23,13 @@ nodes:
   - role: control-plane
     extraPortMappings:
       - containerPort: 30980
-        hostPort: 8080
+        hostPort: 30980
         listenAddress: 127.0.0.1
       - containerPort: 30950
-        hostPort: 3000
+        hostPort: 30950
         listenAddress: 127.0.0.1
       - containerPort: 30080
-        hostPort: 9090
+        hostPort: 30080
         listenAddress: 127.0.0.1
 EOF
 

@@ -20,24 +20,32 @@ All linux distributions adds **envsubst** via [gettext](https://www.gnu.org/soft
 ```shell
 git clone https://github.com/kameshsampath/dag && \
   cd "$(basename "$_" .git)"
-export PROJECT_HOME="${PWD}"
+export DAG_HOME="${PWD}"
 ```
 
 ## Create Kubernetes Cluster
 
 ```shell
-$PROJECT_HOME/bin/kind.sh
+$DAG_HOME/bin/kind.sh
 ```
 
-## Deploy Gitea
+## Gitea
+
+### Deploy Gitea
 
 ```shell
 helm repo add gitea-charts https://dl.gitea.io/charts/
 helm repo update
 helm upgrade \
   --install gitea gitea-charts/gitea \
-  --values $PROJECT_HOME/helm_vars/gitea/values.yaml \
+  --values $DAG_HOME/helm_vars/gitea/values.yaml \
   --wait
+```
+
+### Configure Gitea
+
+```shell
+kubectl apply -k k8s/gitea-config
 ```
 
 ## Deploy ArgoCD
@@ -63,7 +71,7 @@ export GITEA_HTTP_CLUSTER_IP=$(kubectl get svc gitea-http -ojsonpath='{.spec.clu
 Deploy argocd server,
 
 ```shell
-envsubst < $PROJECT_HOME/helm_vars/argocd/values.yaml | helm upgrade --install argocd argo/argo-cd \
+envsubst < $DAG_HOME/helm_vars/argocd/values.yaml | helm upgrade --install argocd argo/argo-cd \
   --namespace=argocd \
   --wait \
   --values -
@@ -75,7 +83,7 @@ envsubst < $PROJECT_HOME/helm_vars/argocd/values.yaml | helm upgrade --install a
 
 ```shell
 export GITEA_DOMAIN="gitea-127.0.0.1.sslip.io"
-export GITEA_URL="http://${GITEA_DOMAIN}:3000"
+export GITEA_URL="http://${GITEA_DOMAIN}:30950"
 ```
 
 You can access Gitea now in your browser using open `${GITEA_URL}`. Default credentials `demo/demo@123`.
@@ -85,7 +93,7 @@ You can access Gitea now in your browser using open `${GITEA_URL}`. Default cred
 The URL where Drone Server will be deployed,
 
 ```shell
-export DRONE_SERVER_HOST="drone-127.0.0.1.sslip.io:8080"
+export DRONE_SERVER_HOST="drone-127.0.0.1.sslip.io:30980"
 export DRONE_SERVER_URL="http://${DRONE_SERVER_HOST}"
 ```
 
@@ -110,9 +118,9 @@ Deploy drone server,
 
 ```shell
 helm upgrade --install drone drone/drone \
-  --values $PROJECT_HOME/helm_vars/drone/values.yaml \
+  --values $DAG_HOME/helm_vars/drone/values.yaml \
   --namespace=drone \
-  --post-renderer  $PROJECT_HOME/k8s/drone/kustomize \
+  --post-renderer  $DAG_HOME/k8s/drone/kustomize \
   --wait
 ```
 
@@ -126,7 +134,7 @@ This time we will use `kubectl` patch technique,
 
 ```shell
 export DRONE_SERVICE_IP="$(kubectl get svc -n drone drone -ojsonpath='{.spec.clusterIP}')"
-kubectl patch statefulset gitea -n default --patch "$(envsubst<$PROJECT_HOME/k8s/patch.json)" 
+kubectl patch statefulset gitea -n default --patch "$(envsubst<$DAG_HOME/k8s/patch.json)" 
 ```
 
 You can now open the Drone Server using the url `${DRONE_SERVER_URL}`, follow the onscreen instructions complete the registration and activate the `drone-quickstart` repo.
@@ -141,7 +149,7 @@ We need to deploy `drone-runner-kube` that will be used to run the pipelines on 
 ```shell
 helm upgrade --install drone-runner-kube drone/drone-runner-kube \
   --namespace=drone \
-  --values $PROJECT_HOME/helm_vars/drone-runner-kube/values.yaml \
+  --values $DAG_HOME/helm_vars/drone-runner-kube/values.yaml \
   --wait
 ```
 
@@ -190,4 +198,4 @@ The demo uses a [util](./util/) code to configure Gitea, you can build the code 
 ./build.sh
 ```
 
-The command generates a binary in $PROJECT_HOME/bin for each OS/Arch combination. Use the one that suits your OS/Arch combo.
+The command generates a binary in $DAG_HOME/bin for each OS/Arch combination. Use the one that suits your OS/Arch combo.
