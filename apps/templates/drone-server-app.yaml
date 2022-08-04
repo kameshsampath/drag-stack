@@ -13,14 +13,14 @@ spec:
   source:
     repoURL: https://charts.drone.io 
     targetRevision: {{ .Values.spec.drone.server.version }} 
-    path: {{ .Values.spec.drone.server.valuesPath }}
+    # path: {{ .Values.spec.drone.server.valuesPath }}
     chart: drone  
     helm:
       releaseName: drone-server
       # Helm values files for overriding values in the helm chart
       # The path is relative to the spec.source.path directory defined above
       valueFiles:
-      - drone-server/values.yaml
+      - {{ .Values.spec.drone.server.valuesPath }}/drone-server/values.yaml
       version: v3
   # Destination cluster and namespace to deploy the application
   destination:
