@@ -13,7 +13,6 @@ spec:
   source:
     repoURL: https://charts.drone.io 
     targetRevision: {{ .Values.spec.drone.server.version }} 
-    path: ../{{ .Values.spec.drone.server.valuesPath }}
     chart: drone  
     helm:
       releaseName: drone
