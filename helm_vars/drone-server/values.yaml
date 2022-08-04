@@ -9,7 +9,7 @@ service:
 extraSecretNamesForEnvFrom:
    # all the other as $PROJECT_HOME/k8s/.env variables are loaded via this secret
    # https://docs.drone.io/server/reference/
-  - dag-demos-secret
+  - demo-oauth-user-01-secret
 
 env:
   # the Drone server host typically what the drone runners will use to 
@@ -20,7 +20,7 @@ env:
   # The url where Gitea could be reached, typically used while 
   # cloning the sources
   # https://docs.drone.io/server/provider/gitea/
-  DRONE_GITEA_SERVER: http://gitea-127.0.0.1.sslip.io:30950/
+  DRONE_GITEA_SERVER: http://gitea-http.default.svc.cluster.local:3000/
   # For this local setup and demo we wil run Drone in http mode
   DRONE_SERVER_PROTO: http
   
