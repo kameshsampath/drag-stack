@@ -43,7 +43,7 @@ spec:
           # The url where Gitea could be reached, typically used while 
           # cloning the sources
           # https://docs.drone.io/server/provider/gitea/
-          DRONE_GITEA_SERVER: {{ .Values.spec.gitea.server.inClusterURL  }}
+          DRONE_GITEA_SERVER: {{ .Values.spec.gitea.server.externalURL  }}
           # For this local setup and demo we wil run Drone in http mode
           DRONE_SERVER_PROTO: http
 
