@@ -13,15 +13,58 @@ spec:
   source:
     repoURL: https://charts.drone.io 
     targetRevision: {{ .Values.spec.drone.server.version }} 
-    # path: {{ .Values.spec.drone.server.valuesPath }}
+    path: {{ .Values.spec.drone.server.valuesPath }}
     chart: drone  
     helm:
       releaseName: drone-server
       # Helm values files for overriding values in the helm chart
       # The path is relative to the spec.source.path directory defined above
-      valueFiles:
-      - {{ .Values.spec.drone.server.valuesPath }}/drone-server/values.yaml
+      # valueFiles:
+      # - drone-server/values.yaml
+
+      # Values file as block file
+      values: |
+        service:
+          # the Drone Kubernetes service type
+          type: NodePort
+          port: 80
+          # this port will be used in KinD extra port mappings to allow accessing the 
+          # drone server from our laptops
+          nodePort: 30980
+          
+        extraSecretNamesForEnvFrom:
+          # all the other as $PROJECT_HOME/k8s/.env variables are loaded via this secret
+          # https://docs.drone.io/server/reference/
+          - {{ .Values.spec.gitea.oAuthSecret }}
+
+        env:
+          # the Drone server host typically what the drone runners will use to 
+          # communicate with the server
+          DRONE_SERVER_HOST: {{ .Values.spec.drone.server.host }}
+          # Since we run Gitea in http mode we will skip TLS verification
+          DRONE_GITEA_SKIP_VERIFY: true
+          # The url where Gitea could be reached, typically used while 
+          # cloning the sources
+          # https://docs.drone.io/server/provider/gitea/
+          DRONE_GITEA_SERVER: {{ .Values.spec.gitea.server.inClusterURL  }}
+          # For this local setup and demo we wil run Drone in http mode
+          DRONE_SERVER_PROTO: http
+
+      # Optional Helm version to template with. If omitted it will fall back to look at the 'apiVersion' in Chart.yaml
+      # and decide which Helm binary to use automatically. This field can be either 'v2' or 'v3'.
       version: v3
+
+    # plugin specific config
+    # plugin:
+    #   # Only set the plugin name if the plugin is defined in argocd-cm.
+    #   # If the plugin is defined as a sidecar, omit the name. The plugin will be automatically matched with the
+    #   # Application according to the plugin's discovery rules.
+    #   name: mypluginname
+    #   # environment variables passed to the plugin
+    #   env:
+    #     - name: FOO
+    #       value: bar
+
   # Destination cluster and namespace to deploy the application
   destination:
     server: {{ .Values.spec.destination.server }}
