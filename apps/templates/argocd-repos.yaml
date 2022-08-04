@@ -9,9 +9,9 @@ metadata:
   labels:
     argocd.argoproj.io/secret-type: repository
 stringData:
-  url: ${GITEA_URL}
-  password: ${GITEA_USER}
-  username: ${GITEA_USER_PASSWORD}
+  url: {{ .Values.spec.gitea.server.inClusterURL }}
+  password: {{ .Values.spec.gitea.username }}
+  username: {{ .Values.spec.gitea.password }}
 ---
 apiVersion: v1
 kind: Secret
@@ -22,5 +22,5 @@ metadata:
     argocd.argoproj.io/secret-type: repository
 stringData:
   url: https://charts.drone.io
-  name: drone.io
+  name: drone
   type: helm

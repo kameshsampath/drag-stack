@@ -14,7 +14,7 @@ spec:
     repoURL: https://charts.drone.io 
     targetRevision: {{ .Values.spec.drone.server.version }} 
     path: {{ .Values.spec.drone.server.valuesPath }}
-    chart: drone/drone  
+    chart: drone  
     helm:
       releaseName: drone-server
       # Helm values files for overriding values in the helm chart
@@ -46,7 +46,7 @@ spec:
           # The url where Gitea could be reached, typically used while 
           # cloning the sources
           # https://docs.drone.io/server/provider/gitea/
-          DRONE_GITEA_SERVER: {{ .Values.spec.gitea.server }}
+          DRONE_GITEA_SERVER: {{ .Values.spec.gitea.server.inClusterURL  }}
           # For this local setup and demo we wil run Drone in http mode
           DRONE_SERVER_PROTO: http
 
