@@ -5,8 +5,9 @@ spec:
     repoURL: http://gitea-127.0.0.1.sslip.io:30950/demo/dag
     targetRevision: HEAD
   gitea:
-    outClusterURL: http://gitea-127.0.0.1.sslip.io:30950/
-    inClusterURL: http://gitea-http.default.svc.cluster.local:3000/
+    server:
+      outClusterURL: http://gitea-127.0.0.1.sslip.io:30950/
+      inClusterURL: http://gitea-http.default.svc.cluster.local:3000/
     oAuthSecret: demo-oauth-user-01-secret
     username: user-01
     password: user-01@123
