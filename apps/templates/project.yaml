@@ -17,9 +17,9 @@ spec:
   # Only permit applications to deploy to the guestbook namespace in the same cluster
   destinations:
   - namespace: drone
-    server: https://kubernetes.default.svc
+    server: {{ .Values.spec.destination.server }}
   - namespace: default
-    server: https://kubernetes.default.svc
+    server: {{ .Values.spec.destination.server }}
 
   # Deny all cluster-scoped resources from being created, except for Namespace
   clusterResourceWhitelist:

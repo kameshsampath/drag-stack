@@ -1,0 +1,15 @@
+spec:
+  destination:
+    server: https://kubernetes.default.svc
+  source:
+    repoURL: http://gitea-127.0.0.1.sslip.io:30950/demo/dag
+    targetRevision: HEAD
+  gitea:
+    server: http://gitea-127.0.0.1.sslip.io:30950/
+    oAuthSecret: demo-oauth-user-01-secret
+  drone:
+    server:
+      version: 0.5.0
+      host: drone-127.0.0.1.sslip.io:30980
+      namespace: drone
+      valuesPath: helm_vars
