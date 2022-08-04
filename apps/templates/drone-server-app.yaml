@@ -16,7 +16,7 @@ spec:
     path: {{ .Values.spec.drone.server.valuesPath }}
     chart: drone  
     helm:
-      releaseName: drone-server
+      releaseName: drone
       # Helm values files for overriding values in the helm chart
       # The path is relative to the spec.source.path directory defined above
       # valueFiles:
@@ -27,7 +27,6 @@ spec:
         service:
           # the Drone Kubernetes service type
           type: NodePort
-          port: 80
           # this port will be used in KinD extra port mappings to allow accessing the 
           # drone server from our laptops
           nodePort: 30980
