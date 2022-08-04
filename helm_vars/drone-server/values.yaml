@@ -1,7 +1,7 @@
 service:
   # the Drone Kubernetes service type
   type: NodePort
-  port: 8080
+  port: 80
   # this port will be used in KinD extra port mappings to allow accessing the 
   # drone server from our laptops
   nodePort: 30980
