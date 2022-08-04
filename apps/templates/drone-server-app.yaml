@@ -1,6 +1,9 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
+  #IMPORANT: Don't use name as drone-server as it will cause 
+  # drone deployment to fail 
+  # https://discourse.drone.io/t/drone-server-changing-ports-protocol/4144
   name: drone
   namespace: argocd
   # Add this finalizer ONLY if you want these to cascade delete.
