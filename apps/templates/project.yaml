@@ -22,6 +22,8 @@ spec:
     server: {{ .Values.destination.server }}
   - namespace: infra
     server: {{ .Values.destination.server }}
+  - namespace: demo-apps
+    server: {{ .Values.destination.server }}
 
   # Deny all cluster-scoped resources from being created, except for Namespace
   clusterResourceWhitelist:
