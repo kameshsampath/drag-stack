@@ -169,6 +169,23 @@ What we have done until now,
   - Drone Server
   - Drone Kube Runner
 
+### Add Drone Admin User
+
+Copy the account settings named `Example CLI Usage` from the Drone Account Settings page, verify if its all good,
+
+```shell
+drone info
+```
+
+Update the DAG App `$DAG_HOME/helm_vars/dag/values.yaml` with values matching to the environment,
+
+```shell
+export ENABLE_DRONE_ADMIN=true
+envsubst < $DAG_HOME/helm_vars/dag/values.tpl.yaml > $DAG_HOME/helm_vars/dag/values.yaml
+```
+
+### Deploy Quickstart App
+
 Let us now login to the Drone Server <http://drone-127.0.0.1.sslip.io:30980/>, follow on screen wizard to login and authorize Drone via Gitea.
 
 **NOTE**: The default Gitea credentials is like `<user-name>/<user-name@123>`
