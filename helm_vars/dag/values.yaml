@@ -1,21 +1,21 @@
 destination:
   server: https://kubernetes.default.svc
 source:
-  repoURL: ${GITEA_URL}/${GITEA_USER}/dag
+  repoURL: http://gitea-127.0.0.1.sslip.io:30950/user-01/dag
   targetRevision: HEAD
 gitea:
   server:
-    outClusterURL: ${GITEA_URL}
-    inClusterURL: ${GITEA_INTERNAL_URL}
-  oAuthSecret: demo-oauth-${GITEA_USER}-secret
-  username: ${GITEA_USER}
-  password: ${GITEA_USER}@123
+    outClusterURL: http://gitea-127.0.0.1.sslip.io:30950
+    inClusterURL: 
+  oAuthSecret: demo-oauth-user-01-secret
+  username: user-01
+  password: user-01@123
 drone:
   server:
     version: support-host-aliases
-    host: ${DRONE_SERVER_URL}
+    host: http://drone-127.0.0.1.sslip.io:30980
     namespace: drone
     hostAliases:
-      - ip: ${GITEA_HTTP_SERVICE_IP}
+      - ip: 10.96.94.47
         hostnames:
-        - ${GITEA_URL}
+        - http://gitea-127.0.0.1.sslip.io:30950
