@@ -25,7 +25,7 @@ spec:
     # TODO: set to official repo once the PR is merged
     repoURL: https://github.com/kameshsampath/drone-charts.git  
     targetRevision:  {{ .Values.drone.server.version }}
-    path: drone
+    path: charts/drone
 
     helm:
       releaseName: drone
