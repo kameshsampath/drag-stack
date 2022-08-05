@@ -1,8 +1,8 @@
-# DroneArgoGitea(DAG) Stack
+# Drone Argo CD Gitea(DAG) Stack
 
-A small demo and setup to demonstrate on how to setup [Drone](https://drone.io) with [kind](https://kind.sigs.k8s.io/) as your local Kubernetes Cluster.
+A demo to demonstrate on how to setup [Drone](https://drone.io), [Argo CD](https://argo-cd.readthedocs.io/) and [Gitea](https://gitea.io/) with [kind](https://kind.sigs.k8s.io/) as your local Kubernetes Cluster.
 
-For complete walk through and explanation checkout my [blog](https://kubesimplify.com/yours-kindly-drone)
+This demo also shows how to use the Argo CD [declarative setup](https://argo-cd.readthedocs.io/en/stable/operator-manual/declarative-setup/) to setup [Drone](https://drone.io) with Drone Kubernetes runner.
 
 ## Required tools
 
@@ -11,6 +11,9 @@ For complete walk through and explanation checkout my [blog](https://kubesimplif
 - [Helm](https://helm.sh/)
 - [Kustomize](https://kustomize.io/)
 - [envsusbst](https://www.man7.org/linux/man-pages/man1/envsubst.1.html)
+  
+### Optional
+
 - [Argo CD CLI](https://github.com/argoproj/argo-cd/releases/latest)
 - [direnv](https://direnv.net/)
 
@@ -27,7 +30,7 @@ export DAG_HOME="${PWD}"
 ## Create Kubernetes Cluster
 
 ```shell
-$DAG_HOME/bin/kind.sh
+$DAG_HOME/back/kind.sh
 ```
 
 ## Gitea
@@ -193,6 +196,10 @@ Commit and push the code to see the build trigger, you check the build status in
 ![Drone Dashboard](./docs/images/validation_success)
 
 **Congratulations**!!! You are now a GitOpsian. Add other projects of yours and keep rocking with Drone CI and Argo CD.
+
+## Gotchas
+
+If you are doing local setup with Kind make sure to check the [setup gotchas](./gotchas.md)for some key details.
 
 ## Clean up
 

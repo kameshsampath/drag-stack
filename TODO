@@ -1,1 +1,4 @@
-1. Add drone pipeline
+# TODOS
+
+- Pushing to local Docker registry with Argo CD able to pull the images 
+- Add drone pipeline
