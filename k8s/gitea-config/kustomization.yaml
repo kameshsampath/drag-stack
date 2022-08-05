@@ -4,4 +4,8 @@ kind: Kustomization
 namespace: drone
 resources:
 - https://raw.githubusercontent.com/kameshsampath/drone-tutorial-gitea-helper/main/manifests/install.yaml
-## add your overrides
+
+patches:
+- path: workshop-config-patch.yaml
+  target:
+    kind: ConfigMap
