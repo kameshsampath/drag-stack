@@ -21,9 +21,9 @@ spec:
 
   # Destination cluster and namespace to deploy the application
   destination:
-    server: {{ .Values.spec.destination.server }}
+    server: https://kubernetes.default.svc
     # The namespace will only be set for namespace-scoped resources that have not set a value for .metadata.namespace
-    namespace: {{ .Values.spec.drone.server.namespace }}
+    namespace: drone
 
   # Sync policy
   syncPolicy:
