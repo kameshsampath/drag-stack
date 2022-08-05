@@ -17,7 +17,7 @@ spec:
   source:
     repoURL: {{ .Values.gitea.server.outClusterURL }}/{{ .Values.gitea.username }}/quarkus-springboot-demo-gitops.git
     targetRevision:  main
-    chart: app
+    path: app
     helm:
       releaseName: quarkus-springboot-demo
       values: |
