@@ -51,8 +51,8 @@ spec:
     kind: ConfigMap
   - group: ""
     kind: Secret
-  # - group: rbac.authorization.k8s.io
-  #   kind: "*"
+  - group: rbac.authorization.k8s.io
+    kind: "*"
   - group: ""
     kind: PersistentVolumeClaim
   - group: ""
