@@ -1,19 +1,40 @@
-spec:
-  destination:
-    server: https://kubernetes.default.svc
-  source:
-    repoURL: http://gitea-127.0.0.1.sslip.io:30950/demo/dag
-    targetRevision: HEAD
-  gitea:
-    server:
-      outClusterURL: http://gitea-127.0.0.1.sslip.io:30950
-      inClusterURL: http://gitea-http.default.svc.cluster.local:3000
-    oAuthSecret: demo-oauth-user-01-secret
-    username: user-01
-    password: user-01@123
-  drone:
-    server:
-      version: 0.5.0
-      host: drone-127.0.0.1.sslip.io:30980
-      namespace: drone
-      valuesPath: helm_vars
+# The Kubernetes Cluster where the resources wil be created
+# Defaults to local cluster where ArgoCD is deployed
+destination:
+  server: https://kubernetes.default.svc
+# The Git server to used by the application
+source:
+  # the source repository on git
+  repoURL: 
+  # The branch/tag to use for the source repo
+  targetRevision: 
+# The Gitea Server configuration that will be used for GitOps
+gitea:
+  server:
+    # the URL to reach git externally
+    outClusterURL: http://gitea-127.0.0.1.sslip.io:30950
+    # the URL to reach git internally
+    inClusterURL: http://gitea-http.default.svc.cluster.local:3000
+  # the gitea oAuth secret to use with Drone
+  oAuthSecret: demo-oauth-user-01-secret
+  # the gitea username
+  username: user-01
+  # the gitea password
+  password: user-01@123
+# Drone settings
+drone:
+  # Drone Helm Chart settings
+  server:
+    # the chart version
+    # version: 0.5.0
+    version: support-host-aliases
+    # the Drone server host to use
+    host: drone-127.0.0.1.sslip.io:30980
+    # the namespace where to deploy drone server
+    namespace: drone
+    # -- Mapping between IP and hostnames that will be injected as entries in the pod's hosts files
+    # https://kubernetes.io/docs/tasks/network/customize-hosts-file-for-pods/
+    hostAliases: []
+      # - ip: 10.20.30.40
+      #   hostnames:
+      #   - gitea-127.0.0.1.sslip.io

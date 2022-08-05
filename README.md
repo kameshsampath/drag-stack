@@ -42,6 +42,8 @@ helm upgrade \
   --wait
 ```
 
+You can access Gitea now in your browser using open <http://gitea-127.0.0.1.sslip.io:30950>. Default credentials `demo/demo@123`.
+
 ### Configure Gitea
 
 ```shell
@@ -77,26 +79,6 @@ envsubst < $DAG_HOME/helm_vars/argocd/values.yaml | helm upgrade --install argoc
   --values -
 ```
 
-## Setup Environment
-
-## Gitea URL
-
-```shell
-export GITEA_DOMAIN="gitea-127.0.0.1.sslip.io"
-export GITEA_URL="http://${GITEA_DOMAIN}:30950"
-```
-
-You can access Gitea now in your browser using open `${GITEA_URL}`. Default credentials `demo/demo@123`.
-
-## Drone URL
-
-The URL where Drone Server will be deployed,
-
-```shell
-export DRONE_SERVER_HOST="drone-127.0.0.1.sslip.io:30980"
-export DRONE_SERVER_URL="http://${DRONE_SERVER_HOST}"
-```
-
 ## Login to ArgoCD via CLI
 
 ```shell
@@ -105,11 +87,45 @@ argocd login argocd-127.0.0.1.sslip.io:30080 --insecure --username admin --passw
 
 ## Cluster Bootstrapping
 
+### Setup Environment
+
+Set some variables for convenience
+
+### Gitea
+
 ```shell
-argocd app create apps \
-  --dest-namespace argocd \
-  --dest-server https://kubernetes.default.svc \
-  --repo "${GITEA_URL}/demo/dag.git" \
-  --path apps  
-argocd app sync apps  
+export GITEA_DOMAIN="gitea-127.0.0.1.sslip.io"
+export GITEA_INCLUSTER_URL="http://gitea-http.default.svc.cluster.local:3000"
+export GITEA_URL="http://${GITEA_DOMAIN}:30950"
+export GITEA_USER=user-01
+export GITEA_DAG_REPO="${GITEA_URL}/${GITEA_USER}/dag.git"
+```
+
+### Drone
+
+The URL where Drone Server will be deployed,
+
+```shell
+export DRONE_SERVER_HOST="drone-127.0.0.1.sslip.io:30980"
+export DRONE_SERVER_URL="http://${DRONE_SERVER_HOST}"
+```
+
+Update the DAG App `$DEMO_HOME/dag/values.yaml` with values matching to the environment,
+
+```shell
+envusubst < $DEMO_HOME/dag/values.yaml > $DEMO_HOME/dag/values.yaml
+```
+
+Commit and push the code to `${GITEA_DAG_REPO}`
+
+Create DAG App on ArgoCD,
+
+```shell
+kubectl apply -f $DEMO_HOME/k8s/dag
+```
+
+Trigger app sync
+
+```shell
+argocd app sync dag-apps  
 ```
