@@ -19,5 +19,7 @@ drone:
       - ip: ${GITEA_HTTP_CLUSTER_IP}
         hostnames:
         - ${GITEA_DOMAIN}
+    admin:
+      enable: ${ENABLE_DRONE_ADMIN}
 nexus3:
   enabled: true

@@ -38,6 +38,8 @@ drone:
       # - ip: 10.20.30.40
       #   hostnames:
       #   - gitea-127.0.0.1.sslip.io
+    admin:
+      enable: false
 nexus3:
   enabled: false
   docker:
