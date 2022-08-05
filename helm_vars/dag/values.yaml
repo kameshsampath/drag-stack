@@ -23,3 +23,7 @@ drone:
       enable: true
 nexus3:
   enabled: true
+apps:
+  java:
+    demo: 
+      install: true

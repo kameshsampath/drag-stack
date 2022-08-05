@@ -44,3 +44,10 @@ nexus3:
   enabled: false
   docker:
     enabled: false
+apps:
+  java:
+    demo: 
+      install: false
+      # defaulting to the Kind local registry
+      image: localhost:5001/example/quarkus-springboot-demo
+      tag: latest
