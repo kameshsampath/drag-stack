@@ -18,4 +18,4 @@ drone:
     hostAliases:
       - ip: ${GITEA_HTTP_CLUSTER_IP}
         hostnames:
-        - ${GITEA_URL}
+        - ${GITEA_DOMAIN}
