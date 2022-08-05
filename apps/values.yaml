@@ -48,6 +48,7 @@ apps:
   java:
     demo: 
       install: false
-      # defaulting to the Kind local registry
-      image: localhost:5001/example/quarkus-springboot-demo
-      tag: latest
+      image: 
+        # defaulting to the Kind local registry
+        name: "localhost:5001/example/quarkus-springboot-demo"
+        tag: latest

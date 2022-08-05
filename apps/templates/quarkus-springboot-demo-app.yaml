@@ -10,7 +10,7 @@ metadata:
   labels:
     name: quarkus-springboot-demo
   annotations:
-    argocd-image-updater.argoproj.io/image-list: qsbdemo={{ .Values.apps.java.demo.image }}:{{ .Values.apps.java.demo.image.tag }}
+    argocd-image-updater.argoproj.io/image-list: qsbdemo={{ .Values.apps.java.demo.image.name }}:{{ .Values.apps.java.demo.image.tag }}
     argocd-image-updater.argoproj.io/qsbdemo.update-strategy: digest
 spec:
   project: dag-project
