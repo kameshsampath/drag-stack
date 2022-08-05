@@ -27,6 +27,7 @@ spec:
               value: "false"
         nexusProxyRoute:
           path: /nexus
+        fullnameOverride: "nexus3"
         version: v3
 
   destination:
