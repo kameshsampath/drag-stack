@@ -15,7 +15,7 @@ metadata:
 spec:
   project: dag-project
   source:
-    repoURL: {{ .Values.gitea.server.outClusterURL }}{{ .Values.gitea.server.username }}/quarkus-springboot-demo-gitops
+    repoURL: {{ .Values.gitea.server.outClusterURL }}/{{ .Values.gitea.username }}/quarkus-springboot-demo-gitops.git
     targetRevision:  HEAD
     chart: app
     helm:
