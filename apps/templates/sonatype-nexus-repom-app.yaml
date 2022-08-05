@@ -19,15 +19,15 @@ spec:
     helm:
       releaseName: nexus3
       values: |
-         nexus:
-          docker:
-             enabled: false
-           env:
-             - name: NEXUS_SECURITY_RANDOMPASSWORD
-               value: "false"
-         nexusProxyRoute:
-           path: /nexus
-      version: v3
+        nexus:
+        docker:
+            enabled: false
+          env:
+            - name: NEXUS_SECURITY_RANDOMPASSWORD
+              value: "false"
+        nexusProxyRoute:
+          path: /nexus
+        version: v3
 
   destination:
     server: {{ .Values.destination.server }}
