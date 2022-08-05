@@ -1,7 +1,7 @@
 destination:
   server: https://kubernetes.default.svc
 source:
-  repoURL: http://gitea-http.default.svc.cluster.local:3000/user-01/dag
+  repoURL: http://gitea-127.0.0.1.sslip.io:30950/user-01/dag.git
   targetRevision: HEAD
 gitea:
   server:

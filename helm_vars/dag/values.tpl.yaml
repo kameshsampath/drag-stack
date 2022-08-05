@@ -1,7 +1,7 @@
 destination:
   server: https://kubernetes.default.svc
 source:
-  repoURL: ${GITEA_INTERNAL_URL}/${GITEA_USER}/dag
+  repoURL: ${GITEA_URL}/${GITEA_USER}/dag.git
   targetRevision: HEAD
 gitea:
   server:
