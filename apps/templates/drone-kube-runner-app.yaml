@@ -36,7 +36,7 @@ spec:
           # https://docs.drone.io/server/reference/
           - {{ .Values.gitea.oAuthSecret }}
         env:
-          DRONE_RPC_HOST: "drone:8080"
+          DRONE_RPC_HOST: "drone:30980"
 
       # Optional Helm version to template with. If omitted it will fall back to look at the 'apiVersion' in Chart.yaml
       # and decide which Helm binary to use automatically. This field can be either 'v2' or 'v3'.
