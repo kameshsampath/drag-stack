@@ -34,7 +34,10 @@ spec:
       # valueFiles:
       # - values-prod.yaml
       values: |
-        hostAliases: {{ .Values.drone.server.hostAliases }}
+      {{- with .Values.drone.server.hostAliases }}
+        hostAliases:
+          {{- toYaml . | nindent 10 }}
+      {{- end }}
         service:
           # the Drone Kubernetes service type
           type: NodePort
