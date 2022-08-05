@@ -16,7 +16,7 @@ spec:
   project: dag-project
   source:
     repoURL: {{ .Values.gitea.server.outClusterURL }}/{{ .Values.gitea.server.username }}/quarkus-springboot-demo-gitops.git
-    targetRevision: 41.0.0
+    targetRevision: HEAD
     chart: app  
 
     helm:
