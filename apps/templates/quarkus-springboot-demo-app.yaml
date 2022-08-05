@@ -11,8 +11,8 @@ metadata:
     name: quarkus-springboot-demo
   annotations:
     argocd-image-updater.argoproj.io/image-list: qsbdemo=localhost:5001/example/quarkus-springboot-demo
-    argocd-image-updater.argoproj.io/dex.helm.image-name: apps.java.demo.image.name
-    argocd-image-updater.argoproj.io/dex.helm.image-tag: apps.java.demo.image.tag
+    argocd-image-updater.argoproj.io/qsbdemo.helm.image-name: apps.java.demo.image.name
+    argocd-image-updater.argoproj.io/qsbdemo.helm.image-tag: apps.java.demo.image.tag
     argocd-image-updater.argoproj.io/qsbdemo.update-strategy: digest
 spec:
   project: dag-project
