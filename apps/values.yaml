@@ -40,3 +40,5 @@ drone:
       #   - gitea-127.0.0.1.sslip.io
 nexus3:
   enabled: false
+  docker:
+    enabled: false

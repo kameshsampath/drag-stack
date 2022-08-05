@@ -19,3 +19,5 @@ drone:
       - ip: 10.96.137.81
         hostnames:
         - gitea-127.0.0.1.sslip.io
+nexus3:
+  enabled: true

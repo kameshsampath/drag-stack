@@ -22,8 +22,10 @@ spec:
       values: |
         nexus:
           docker:
-              enabled: false
+              enabled: {{ .Values.nexus3.docker.enabled }}
           env:
+            - name: install4jAddVmParams
+              value: "-Xms1200M -Xmx1200M -XX:MaxDirectMemorySize=2G -XX:+UnlockExperimentalVMOptions -XX:+UseCGroupMemoryLimitForHeap"
             - name: NEXUS_SECURITY_RANDOMPASSWORD
               value: "false"
         nexusProxyRoute:
