@@ -20,8 +20,8 @@ spec:
       releaseName: nexus3
       values: |
         nexus:
-        docker:
-            enabled: false
+          docker:
+              enabled: false
           env:
             - name: NEXUS_SECURITY_RANDOMPASSWORD
               value: "false"
