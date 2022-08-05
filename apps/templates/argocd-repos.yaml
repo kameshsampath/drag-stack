@@ -9,9 +9,9 @@ metadata:
   labels:
     argocd.argoproj.io/secret-type: repository
 stringData:
-  url: {{ .Values.spec.gitea.server.outClusterURL }}/{{ .Values.spec.gitea.username }}/dag.git
-  password: {{ .Values.spec.gitea.username }}
-  username: {{ .Values.spec.gitea.password }}
+  url: {{ .Values.gitea.server.outClusterURL }}/{{ .Values.gitea.username }}/dag.git
+  password: {{ .Values.gitea.username }}
+  username: {{ .Values.gitea.password }}
 ---
 apiVersion: v1
 kind: Secret

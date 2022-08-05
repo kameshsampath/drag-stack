@@ -17,9 +17,11 @@ spec:
   # Only permit applications to deploy to the guestbook namespace in the same cluster
   destinations:
   - namespace: drone
-    server: {{ .Values.spec.destination.server }}
+    server: {{ .Values.destination.server }}
   - namespace: default
-    server: {{ .Values.spec.destination.server }}
+    server: {{ .Values.destination.server }}
+  - namespace: infra
+    server: {{ .Values.destination.server }}
 
   # Deny all cluster-scoped resources from being created, except for Namespace
   clusterResourceWhitelist:
