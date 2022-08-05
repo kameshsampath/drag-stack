@@ -13,7 +13,7 @@ spec:
   source:
     # Using the Charts Repo
     repoURL: https://sonatype.github.io/helm3-charts 
-    # targetRevision: 41.0.0
+    targetRevision: 41.0.0
     chart: nexus-repository-manager  
 
     helm:
