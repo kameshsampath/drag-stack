@@ -53,4 +53,10 @@ argocd:
   imageUpdater:
     version: 0.8.0
     logLevel: info
-    registries: []
+    registries:
+      - name: Kind Registry
+        prefix: "localhost:5001"
+        api_url: http://localhost:5001
+        default: true
+        defaultns: example
+        insecure: true
