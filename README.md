@@ -30,7 +30,7 @@ export DAG_HOME="${PWD}"
 ## Create Kubernetes Cluster
 
 ```shell
-$DAG_HOME/back/kind.sh
+$DAG_HOME/hack/kind.sh
 ```
 
 ## Gitea
