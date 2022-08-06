@@ -23,7 +23,7 @@ spec:
         config:
           logLevel: {{ .Values.argocd.imageUpdater.logLevel }}
       {{- with .Values.argocd.imageUpdater.registries }}
-        hostAliases:
+        registries:
           {{- toYaml . | nindent 10 }}
       {{- end }}
       version: v3
