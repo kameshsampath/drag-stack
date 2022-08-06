@@ -37,6 +37,8 @@ $DAG_HOME/hack/kind.sh
 
 ## Gitea
 
+The following section details on how to deploy Gitea, which will be used as our git repository enabling GitOps.
+
 ### Deploy Gitea
 
 ```shell
@@ -86,6 +88,13 @@ envsubst < $DAG_HOME/helm_vars/argocd/values.yaml | helm upgrade --install argoc
 ```
 
 ## Cluster Bootstrapping
+
+The cluster bootstrapping installs the core DAG stack applications ([App of Apps](https://argo-cd.readthedocs.io/en/stable/operator-manual/declarative-setup/#app-of-apps)) and DAG stack has the following child applications,
+
+- Argo CD Image Updater
+- Drone Server
+- Droner Runners
+- Nexus3 Maven Repository Manager
 
 ### Setup Environment
 
