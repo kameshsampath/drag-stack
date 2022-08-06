@@ -26,8 +26,7 @@ drone:
   # Drone Helm Chart settings
   server:
     # the chart version
-    # version: 0.5.0
-    version: support-host-aliases
+    version: 0.6.0
     # the Drone server host to use
     host: drone-127.0.0.1.sslip.io:30980
     # the namespace where to deploy drone server
@@ -44,11 +43,7 @@ nexus3:
   enabled: false
   docker:
     enabled: false
-apps:
-  java:
-    demo: 
-      install: false
-      image: 
-        # defaulting to the Kind local registry
-        name: "localhost:5001/example/quarkus-springboot-demo"
-        tag: latest
+argocd:
+  imageUpdater:
+    logLevel: info
+    registries: []

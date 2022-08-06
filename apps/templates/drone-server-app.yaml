@@ -17,15 +17,15 @@ spec:
     # Can point to either a Helm chart repo or a git repo.
 
     # Using the Charts Repo
-    # repoURL: https://charts.drone.io 
-    # targetRevision: {{ .Values.drone.server.version }} 
-    # chart: drone  
+    repoURL: https://charts.drone.io 
+    targetRevision: {{ .Values.drone.server.version }} 
+    chart: drone  
 
     # Using Git Repo this has patch for hostAliases
     # TODO: set to official repo once the PR is merged
-    repoURL: https://github.com/kameshsampath/drone-charts.git  
-    targetRevision:  {{ .Values.drone.server.version }}
-    path: charts/drone
+    # repoURL: https://github.com/kameshsampath/drone-charts.git  
+    # targetRevision:  {{ .Values.drone.server.version }}
+    # path: charts/drone
 
     helm:
       releaseName: drone
