@@ -9,7 +9,7 @@ data:
   workshop.yaml: |-
       giteaAdminUserName: demo
       giteaAdminUserPassword: demo@123
-      giteaURL: http://gitea-http.default:3000/
+      giteaURL: http://gitea-http.default:30950/
       users:
         from: 1
         to: 3

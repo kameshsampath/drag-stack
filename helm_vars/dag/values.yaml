@@ -16,9 +16,9 @@ drone:
     host: http://drone-127.0.0.1.sslip.io:30980
     namespace: drone
     hostAliases:
-      - ip: 10.96.137.81
+      - ip: 10.96.54.129
         hostnames:
-        - gitea-127.0.0.1.sslip.io
+          - gitea-127.0.0.1.sslip.io
     admin:
       enable: true
 nexus3:
