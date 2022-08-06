@@ -203,7 +203,7 @@ Let us now login to the Drone Server <http://drone-127.0.0.1.sslip.io:30980/>, f
 
 If all went well you should the Drone Dashboard like,
 
-![Drone Dashboard](./docs/images/drone_dashboard)
+![Drone Dashboard](./docs/images/drone_dashboard.png)
 
 To ensure our setup works let us click on the `drone-quickstart` project and activate it. You should not see any builds now.
 
@@ -221,7 +221,7 @@ host_aliases:
 
 Commit and push the code to see the build trigger, you check the build status in the Drone Dashboard,
 
-![Drone Dashboard](./docs/images/validation_success)
+![Drone Build Success](./docs/images/validation_success.png)
 
 **Congratulations**!!! You are now a GitOpsian. Add other projects of yours and keep rocking with Drone CI and Argo CD.
 
