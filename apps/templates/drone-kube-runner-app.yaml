@@ -15,7 +15,7 @@ spec:
 
     # Using the Charts Repo
     repoURL: https://charts.drone.io 
-    targetRevision: {{ .Values.drone.server.version }} 
+    targetRevision: {{ .Values.drone.kube.runner.version }} 
     chart: drone-runner-kube  
 
     # Using Git Repo this has patch for hostAliases
