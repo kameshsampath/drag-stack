@@ -30,7 +30,7 @@ argocd:
     registries:
       - name: Kind Registry
         prefix: "kind-registry:5000"
-        api_url: http://kind-registry:5000
+        api_url: http://kind-registry:5000/v2
         default: true
         defaultns: example
         insecure: true
