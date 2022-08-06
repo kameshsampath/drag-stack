@@ -12,7 +12,7 @@ gitea:
   password: user-01@123
 drone:
   server:
-    version: support-host-aliases
+    version: 0.6.0
     host: http://drone-127.0.0.1.sslip.io:30980
     namespace: drone
     hostAliases:

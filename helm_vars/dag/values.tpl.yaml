@@ -12,7 +12,7 @@ gitea:
   password: ${GITEA_USER}@123
 drone:
   server:
-    version: support-host-aliases
+    version: 0.6.0
     host: ${DRONE_SERVER_URL}
     namespace: drone
     hostAliases:
@@ -23,3 +23,6 @@ drone:
       enable: ${ENABLE_DRONE_ADMIN}
 nexus3:
   enabled: true
+argocd:
+  imageUpdater:
+    logLevel: debug
