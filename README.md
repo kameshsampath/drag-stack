@@ -83,6 +83,16 @@ envsubst < $DAG_HOME/helm_vars/argocd/values.yaml | helm upgrade --install argoc
   --values -
 ```
 
+### Argo CD Image Updater
+
+As part of the stack defaults, we will use [Argo CD Image Updater](https://argocd-image-updater.readthedocs.io/en/stable) for updating the application images via GitOps
+
+```shell
+kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj-labs/argocd-image-updater/stable/manifests/install.yaml
+```
+
+Wait for the image updater to be ready.
+
 ## Cluster Bootstrapping
 
 ### Setup Environment
@@ -213,6 +223,11 @@ Commit and push the code to see the build trigger, you check the build status in
 ![Drone Dashboard](./docs/images/validation_success)
 
 **Congratulations**!!! You are now a GitOpsian. Add other projects of yours and keep rocking with Drone CI and Argo CD.
+
+Few applications that you can try with this stack,
+
+- <https://github.com/kameshsampath/quarkus-springboot-demo-gitops>
+- MERNStack
 
 ## Gotchas
 
