@@ -22,10 +22,10 @@ spec:
       values: |
         config:
           logLevel: {{ .Values.argocd.imageUpdater.logLevel }}
-      {{- with .Values.argocd.imageUpdater.registries }}
-        registries:
-          {{- toYaml . | nindent 10 }}
-      {{- end }}
+          {{- with .Values.argocd.imageUpdater.registries }}
+          registries:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
       version: v3
 
   # Destination cluster and namespace to deploy the application
