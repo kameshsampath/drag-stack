@@ -51,5 +51,6 @@ nexus3:
     enabled: false
 argocd:
   imageUpdater:
+    version: 0.8.0
     logLevel: info
     registries: []

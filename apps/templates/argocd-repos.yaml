@@ -24,3 +24,15 @@ stringData:
   url: https://charts.drone.io
   name: drone
   type: helm
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: argocd-helm-repo
+  namespace: argocd
+  labels:
+    argocd.argoproj.io/secret-type: repository
+stringData:
+  url: https://argoproj.github.io/argo-helm
+  name: argo
+  type: helm

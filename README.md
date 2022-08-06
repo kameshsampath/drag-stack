@@ -4,6 +4,8 @@ A demo to demonstrate on how to setup [Drone](https://drone.io), [Argo CD](https
 
 This demo also shows how to use the Argo CD [declarative setup](https://argo-cd.readthedocs.io/en/stable/operator-manual/declarative-setup/) to setup [Drone](https://drone.io) with Drone Kubernetes runner.
 
+The stack also deploys [Argo CD Image Updater](https://argocd-image-updater.readthedocs.io/en/stable) to enable updating the application images via GitOps.
+
 ## Required tools
 
 - [Docker Desktop](https://www.docker.com/products/docker-desktop/)
@@ -82,16 +84,6 @@ envsubst < $DAG_HOME/helm_vars/argocd/values.yaml | helm upgrade --install argoc
   --wait \
   --values -
 ```
-
-### Argo CD Image Updater
-
-As part of the stack defaults, we will use [Argo CD Image Updater](https://argocd-image-updater.readthedocs.io/en/stable) for updating the application images via GitOps
-
-```shell
-kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj-labs/argocd-image-updater/stable/manifests/install.yaml
-```
-
-Wait for the image updater to be ready.
 
 ## Cluster Bootstrapping
 
