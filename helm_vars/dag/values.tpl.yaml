@@ -18,7 +18,7 @@ drone:
     hostAliases:
       - ip: ${GITEA_HTTP_CLUSTER_IP}
         hostnames:
-        - ${GITEA_DOMAIN}
+          - ${GITEA_DOMAIN}
     admin:
       enable: ${ENABLE_DRONE_ADMIN}
 nexus3:
@@ -27,3 +27,10 @@ argocd:
   imageUpdater:
     versio: 0.8.0
     logLevel: debug
+    registries:
+      - name: Kind Registry
+        prefix: "localhost:5001"
+        api_url: http://localhost:5001
+        default: true
+        defaultns: example
+        insecure: true
