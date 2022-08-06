@@ -23,6 +23,12 @@ gitea:
   password: user-01@123
 # Drone settings
 drone:
+  kube:
+    runner:
+      version: 0.1.10
+  docker:
+    runner:
+      version: 0.1.0
   # Drone Helm Chart settings
   server:
     # the chart version
