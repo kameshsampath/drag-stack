@@ -1,15 +1,15 @@
 destination:
   server: https://kubernetes.default.svc
 source:
-  repoURL: http://gitea-127.0.0.1.sslip.io:30950//dag.git
+  repoURL: http://gitea-127.0.0.1.sslip.io:30950/user-01/dag.git
   targetRevision: k3s
 gitea:
   server:
     outClusterURL: http://gitea-127.0.0.1.sslip.io:30950
-    inClusterURL: 
-  oAuthSecret: demo-oauth--secret
-  username: 
-  password: @123
+    inClusterURL: http://gitea-http.default.svc.cluster.local:30950
+  oAuthSecret: demo-oauth-user-01-secret
+  username: user-01
+  password: user-01@123
 drone:
   server:
     version: 0.6.0
@@ -33,4 +33,4 @@ argocd:
         defaultns: example
         insecure: true
 artifactory:
-    enabled: 
+    enabled: true
