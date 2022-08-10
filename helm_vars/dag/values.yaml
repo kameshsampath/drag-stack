@@ -6,7 +6,7 @@ source:
 gitea:
   server:
     outClusterURL: http://gitea-127.0.0.1.sslip.io:30950
-    inClusterURL: http://gitea-http.default.svc.cluster.local:30950
+    inClusterURL: 
   oAuthSecret: demo-oauth-user-01-secret
   username: user-01
   password: user-01@123
@@ -16,7 +16,7 @@ drone:
     host: http://drone-127.0.0.1.sslip.io:30980
     namespace: drone
     hostAliases:
-      - ip: 10.43.224.93
+      - ip: 10.43.103.152
         hostnames:
           - gitea-127.0.0.1.sslip.io
     admin:
