@@ -8,3 +8,5 @@ NOTES.txt
 !k8s/gitea-config
 !.envrc
 work
+.k3s
+hack/*.yaml
