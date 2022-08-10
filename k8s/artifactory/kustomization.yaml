@@ -14,11 +14,3 @@ secretGenerator:
     literals:
       - "ADMIN_USER_NAME=admin"
       - "ADMIN_USER_PASSWORD=password"
-
-patchesJson6902:
-- path: patches/job-generate-name.yaml
-  target:
-    group: batch
-    version: v1
-    kind: Job
-    name: config-artifactory
