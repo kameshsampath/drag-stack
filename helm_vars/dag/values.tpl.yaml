@@ -26,9 +26,9 @@ argocd:
     versio: 0.8.0
     logLevel: debug
     registries:
-      - name: "${REGISTRY_NAME}"
-        prefix: "${REGISTRY_NAME}:${REGISTRY_PORT}"
-        api_url: "http://${REGISTRY_NAME}:${REGISTRY_PORT}"
+      - name: "k3d-${REGISTRY_NAME}"
+        prefix: "k3d-${REGISTRY_NAME}:${REGISTRY_PORT}"
+        api_url: "http://k3d-${REGISTRY_NAME}:${REGISTRY_PORT}"
         default: true
         defaultns: example
         insecure: true
