@@ -16,7 +16,7 @@ drone:
     host: http://drone-127.0.0.1.sslip.io:30980
     namespace: drone
     hostAliases:
-      - ip: 10.96.54.129
+      - ip: 10.43.224.93
         hostnames:
           - gitea-127.0.0.1.sslip.io
     admin:
@@ -28,9 +28,9 @@ argocd:
     versio: 0.8.0
     logLevel: debug
     registries:
-      - name: Kind Registry
-        prefix: "kind-registry:5000"
-        api_url: http://kind-registry:5000
+      - name: "myregistry.localhost"
+        prefix: "myregistry.localhost:5001"
+        api_url: "http://myregistry.localhost:5001"
         default: true
         defaultns: example
         insecure: true

@@ -28,9 +28,9 @@ argocd:
     versio: 0.8.0
     logLevel: debug
     registries:
-      - name: Kind Registry
-        prefix: "kind-registry:5000"
-        api_url: http://kind-registry:5000
+      - name: "${REGISTRY_NAME}"
+        prefix: "${REGISTRY_NAME}:${REGISTRY_PORT}"
+        api_url: "http://${REGISTRY_NAME}:${REGISTRY_PORT}"
         default: true
         defaultns: example
         insecure: true
