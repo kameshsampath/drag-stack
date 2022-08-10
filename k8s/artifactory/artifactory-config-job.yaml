@@ -21,7 +21,7 @@ spec:
           args:
             - "-c"
             - >
-              until [ "$(curl --retry 30 --retry-delay 6 -o /dev/null -s -w '%{http_code}' artifactory-oss:8081/artifactory )" -lt 400 ]; do printf "."; sleep 5; done;
+              until [ "$(curl --retry 10 --retry-delay 6 -o /dev/null -s -w '%{http_code}' artifactory-oss:8081/artifactory )" -lt 400 ]; do printf "."; sleep 5; done;
       containers:
         - name: config-artifactory
           image: kameshsampath/kube-dev-tools:v0.0.4@sha256:827128f233b90d9c7253c6f4448b9f74a9954bfaa5b85830935ac10bc05c4b61
@@ -34,8 +34,8 @@ spec:
             - "-c"
           args:
             - > 
-               curl -u "${ADMIN_USER_NAME}:${ADMIN_USER_PASSWORD}"  artifactory-oss:8081/artifactory/api/system/configuration -o system-config.xml && 
+               curl -u "${ADMIN_USER_NAME}:${ADMIN_USER_PASSWORD}"  artifactory-oss.infra:8081/artifactory/api/system/configuration -o system-config.xml && 
                sed -i 's|<anonAccessEnabled>false</anonAccessEnabled>|<anonAccessEnabled>true</anonAccessEnabled>|' system-config.xml && 
-               curl -X POST -H 'Content-Type: application/xml' -u "${ADMIN_USER_NAME}:${ADMIN_USER_PASSWORD}"  artifactory-oss:8081/artifactory/api/system/configuration -d @system-config.xml &&
-               curl -u "${ADMIN_USER_NAME}:${ADMIN_USER_PASSWORD}"  artifactory-oss:8081/artifactory/api/system/configuration | grep -i 'anonAccessEnabled'
+               curl -X POST -H 'Content-Type: application/xml' -u "${ADMIN_USER_NAME}:${ADMIN_USER_PASSWORD}"  artifactory-oss.infra:8081/artifactory/api/system/configuration -d @system-config.xml &&
+               curl -u "${ADMIN_USER_NAME}:${ADMIN_USER_PASSWORD}"  artifactory-oss.infra:8081/artifactory/api/system/configuration | grep -i 'anonAccessEnabled'
       restartPolicy: Never
