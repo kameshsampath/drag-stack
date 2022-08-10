@@ -1,3 +1,4 @@
+{{- if .Values.artifactory.enabled }}
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
@@ -75,3 +76,4 @@ spec:
     kind: "*"
     managedFieldsManagers:
     - kube-controller-manager
+{{- end }}
