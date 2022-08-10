@@ -30,13 +30,18 @@ spec:
           imagePullPolicy: IfNotPresent
           envFrom:
             - secretRef:
-                name: artifactory-admin-cm
+                name: art-admin-cm
+          env:
+            - name: POD_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
           command:
             - "bash"
             - "-c"
           args:
             - > 
-               curl -X POST -H 'Content-Type: application/xml' -u "${ADMIN_USER_NAME}:${ADMIN_USER_PASSWORD}"  artifactory.infra:8081/artifactory/api/system/configuration -d @/config/config.xml
+               curl -X POST -H 'Content-Type: application/xml' -u "${ADMIN_USER_NAME}:${ADMIN_USER_PASSWORD}"  "artifactory.${POD_NAMESPACE}:8081/artifactory/api/system/configuration" -d @/config/config.xml
           volumeMounts:
             - mountPath: /config
               name: art-config

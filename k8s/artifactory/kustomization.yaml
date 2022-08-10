@@ -10,7 +10,7 @@ generatorOptions:
   disableNameSuffixHash: true
 
 secretGenerator:
-  - name: artifactory-admin-cm
+  - name: art-admin-cm
     literals:
       - "ADMIN_USER_NAME=admin"
       - "ADMIN_USER_PASSWORD=password"

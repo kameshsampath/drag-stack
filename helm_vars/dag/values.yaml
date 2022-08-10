@@ -33,4 +33,4 @@ argocd:
         defaultns: example
         insecure: true
 artifactory:
-    enabled: false
+    enabled: yes
