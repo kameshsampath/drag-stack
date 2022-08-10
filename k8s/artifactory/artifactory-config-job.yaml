@@ -3,7 +3,7 @@ kind: Job
 metadata:
   labels:
     app.kubernetes.io/version: "0.0.1"
-  name: config-artifactory
+  generateName: config-artifactory-
   namespace: infra
 spec:
   backoffLimit: 0
@@ -34,8 +34,8 @@ spec:
             - "-c"
           args:
             - > 
-               curl -u "${ADMIN_USER_NAME}:${ADMIN_USER_PASSWORD}"  artifactory-oss.infra:8081/artifactory/api/system/configuration -o system-config.xml && 
+               curl -u "${ADMIN_USER_NAME}:${ADMIN_USER_PASSWORD}"  artifactory.infra:8081/artifactory/api/system/configuration -o system-config.xml && 
                sed -i 's|<anonAccessEnabled>false</anonAccessEnabled>|<anonAccessEnabled>true</anonAccessEnabled>|' system-config.xml && 
-               curl -X POST -H 'Content-Type: application/xml' -u "${ADMIN_USER_NAME}:${ADMIN_USER_PASSWORD}"  artifactory-oss.infra:8081/artifactory/api/system/configuration -d @system-config.xml &&
-               curl -u "${ADMIN_USER_NAME}:${ADMIN_USER_PASSWORD}"  artifactory-oss.infra:8081/artifactory/api/system/configuration | grep -i 'anonAccessEnabled'
+               curl -X POST -H 'Content-Type: application/xml' -u "${ADMIN_USER_NAME}:${ADMIN_USER_PASSWORD}"  artifactory.infra:8081/artifactory/api/system/configuration -d @system-config.xml &&
+               curl -u "${ADMIN_USER_NAME}:${ADMIN_USER_PASSWORD}"  artifactory.infra:8081/artifactory/api/system/configuration | grep -i 'anonAccessEnabled'
       restartPolicy: Never
