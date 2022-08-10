@@ -6,7 +6,7 @@ metadata:
   annotations:
     argocd.argoproj.io/hook: PostSync
     argocd.argoproj.io/hook-delete-policy: HookSucceeded
-  generateName: config-artifactory-
+  name: config-artifactory
   namespace: infra
 spec:
   backoffLimit: 0
