@@ -21,8 +21,6 @@ drone:
           - gitea-127.0.0.1.sslip.io
     admin:
       enable: true
-nexus3:
-  enabled: true
 argocd:
   imageUpdater:
     versio: 0.8.0

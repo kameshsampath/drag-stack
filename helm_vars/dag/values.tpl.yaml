@@ -21,8 +21,6 @@ drone:
           - ${GITEA_DOMAIN}
     admin:
       enable: ${ENABLE_DRONE_ADMIN}
-nexus3:
-  enabled: true
 argocd:
   imageUpdater:
     versio: 0.8.0

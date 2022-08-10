@@ -11,7 +11,7 @@ spec:
   project: default
   source:
     repoURL: ${GITEA_DAG_REPO}
-    targetRevision:  HEAD
+    targetRevision:  ${DAG_TARGET_VERSION}
     path: apps
     helm:
       releaseName: dag-apps
