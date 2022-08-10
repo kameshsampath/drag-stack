@@ -7,7 +7,6 @@ metadata:
     argocd.argoproj.io/hook: PostSync
     argocd.argoproj.io/hook-delete-policy: HookSucceeded
   name: config-artifactory
-  namespace: infra
 spec:
   backoffLimit: 0
   template:
@@ -37,8 +36,12 @@ spec:
             - "-c"
           args:
             - > 
-               curl -u "${ADMIN_USER_NAME}:${ADMIN_USER_PASSWORD}"  artifactory.infra:8081/artifactory/api/system/configuration -o system-config.xml && 
-               sed -i 's|<anonAccessEnabled>false</anonAccessEnabled>|<anonAccessEnabled>true</anonAccessEnabled>|' system-config.xml && 
-               curl -X POST -H 'Content-Type: application/xml' -u "${ADMIN_USER_NAME}:${ADMIN_USER_PASSWORD}"  artifactory.infra:8081/artifactory/api/system/configuration -d @system-config.xml &&
-               curl -u "${ADMIN_USER_NAME}:${ADMIN_USER_PASSWORD}"  artifactory.infra:8081/artifactory/api/system/configuration | grep -i 'anonAccessEnabled'
+               curl -X POST -H 'Content-Type: application/xml' -u "${ADMIN_USER_NAME}:${ADMIN_USER_PASSWORD}"  artifactory.infra:8081/artifactory/api/system/configuration -d @/config/config.xml
+          volumeMounts:
+            - mountPath: /config
+              name: art-config
+      volumes:
+        - name: art-config
+          configMap:
+            name: art-config
       restartPolicy: Never

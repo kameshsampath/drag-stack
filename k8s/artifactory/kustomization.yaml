@@ -14,3 +14,7 @@ secretGenerator:
     literals:
       - "ADMIN_USER_NAME=admin"
       - "ADMIN_USER_PASSWORD=password"
+configMapGenerator:
+  - name: art-config
+    files:
+      - "config.xml"
