@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: docker-dind
+spec:
+  selector:
+    matchLabels:
+      app: docker-dind
+  template:
+    metadata:
+      labels:
+        app: docker-dind
+    spec:
+      volumes:
+      - name: storage
+        emptyDir: {}
+      containers:
+      - name: docker-dind
+        image: docker:20-dind
+        imagePullPolicy: IfNotPresent
+        command: ["dockerd", "--host", "tcp://127.0.0.1:2375"]
+        securityContext:
+          privileged: true
+        volumeMounts:
+          - name: storage
+            mountPath: /var/lib/docker
+            subPath: docker
+      - name: tools
+        image: kameshsampath/kube-dev-tools:v0.0.4
+        imagePullPolicy: IfNotPresent
+        env:
+          - name: DOCKER_HOST
+            value: tcp://localhost:2375
+        command:
+          - "bash"
+        args:
+          - "-c"
+          - "tail"
+          - "-f"
+          - "/dev/null"
+  
