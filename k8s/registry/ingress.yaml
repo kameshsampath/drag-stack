@@ -10,7 +10,10 @@ spec:
   - host: my-registry.${TRAEFIK_LOADBALANCER_IP}
     http:
       paths:
-      - path: /
+      - pathType: Prefix
+        path: "/"
         backend:
-          serviceName: my-registry
-          servicePort: 5000
+          service: 
+            name: my-registry
+            port: 
+             number: 5000
