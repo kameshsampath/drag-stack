@@ -2,7 +2,7 @@ destination:
   server: https://kubernetes.default.svc
 source:
   repoURL: ${GITEA_URL}/${GITEA_USER}/dag.git
-  targetRevision: HEAD
+  targetRevision: k3s
 gitea:
   server:
     outClusterURL: ${GITEA_URL}
@@ -21,16 +21,16 @@ drone:
           - ${GITEA_DOMAIN}
     admin:
       enable: ${ENABLE_DRONE_ADMIN}
-nexus3:
-  enabled: true
 argocd:
   imageUpdater:
     versio: 0.8.0
     logLevel: debug
     registries:
-      - name: Kind Registry
-        prefix: "kind-registry:5000"
-        api_url: http://kind-registry:5000
+      - name: "k3d-${REGISTRY_NAME}"
+        prefix: "k3d-${REGISTRY_NAME}:${REGISTRY_PORT}"
+        api_url: "http://k3d-${REGISTRY_NAME}:${REGISTRY_PORT}"
         default: true
         defaultns: example
         insecure: true
+artifactory:
+    enabled: ${ENABLE_ARTIFACTORY}

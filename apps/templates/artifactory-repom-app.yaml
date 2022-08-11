@@ -1,41 +1,43 @@
-{{- if .Values.nexus3.enabled }}
+{{- if .Values.artifactory.enabled }}
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: nexus3
+  name: artifactory
   namespace: argocd
   # Add this finalizer ONLY if you want these to cascade delete.
   finalizers:
     - resources-finalizer.argocd.argoproj.io
   labels:
-    name: nexus3
+    name: artifactory
 spec:
   project: dag-project
   source:
     # Using the Charts Repo
-    repoURL: https://sonatype.github.io/helm3-charts 
-    targetRevision: 41.0.0
-    chart: nexus-repository-manager  
+    repoURL: https://charts.jfrog.io 
+    targetRevision: 107.41.7
+    chart: artifactory-oss 
 
     helm:
-      releaseName: nexus3
+      releaseName: artifactory
       values: |
-        nexus:
-          docker:
-              enabled: {{ .Values.nexus3.docker.enabled }}
-          env:
-            - name: install4jAddVmParams
-              value: "-Xms4096M -Xmx4096M -XX:MaxDirectMemorySize=2G -XX:+UnlockExperimentalVMOptions -XX:+UseCGroupMemoryLimitForHeap"
-            - name: NEXUS_SECURITY_RANDOMPASSWORD
-              value: "false"
+        artifactory:
+          nginx:
+            enabled: false
+          postgresql:
+            enabled: false
           resources:
             requests:
-              cpu: 2
-              memory: 4Gi
+              memory: "1Gi"
+              cpu: "500m"
             limits:
-              cpu: 4
-              memory: 8Gi
-        fullnameOverride: "nexus3"
+              memory: "4Gi"
+              cpu: "1"
+          javaOpts:
+            xms: "1g"
+            xmx: "3g"
+        postgresql:
+          enabled: false
+        fullnameOverride: "artifactory-oss"
         version: v3
 
   destination:

@@ -9,7 +9,7 @@ The stack also deploys [Argo CD Image Updater](https://argocd-image-updater.read
 ## Required tools
 
 - [Docker Desktop](https://www.docker.com/products/docker-desktop/)
-- [kind](https://kind.sigs.k8s.io/)
+- [k3d](https://k3d.io/)
 - [Helm](https://helm.sh/)
 - [Kustomize](https://kustomize.io/)
 - [envsusbst](https://www.man7.org/linux/man-pages/man1/envsubst.1.html)
@@ -32,7 +32,7 @@ export DAG_HOME="${PWD}"
 ## Create Kubernetes Cluster
 
 ```shell
-$DAG_HOME/hack/kind.sh
+$DAG_HOME/hack/cluster.sh
 ```
 
 ## Gitea
@@ -56,6 +56,15 @@ You can access Gitea now in your browser using open <http://gitea-127.0.0.1.ssli
 
 ```shell
 kubectl apply -k k8s/gitea-config
+```
+
+Wait for few seconds for the job to complete.
+
+Running the command `k get jobs -n drone` should show the following output,
+
+```shell
+NAME             COMPLETIONS   DURATION   AGE
+workshop-setup   1/1           17s        48s
 ```
 
 ## Deploy ArgoCD
@@ -86,6 +95,8 @@ envsubst < $DAG_HOME/helm_vars/argocd/values.yaml | helm upgrade --install argoc
   --wait \
   --values -
 ```
+
+You can access Argo CD now in your browser using open <http://localhost:30080>. Default credentials `admin/demo@123`.
 
 ## Cluster Bootstrapping
 
@@ -118,6 +129,14 @@ Verify we have the `${GITEA_HTTP_CLUSTER_IP}` variable set,
 export GITEA_HTTP_CLUSTER_IP=$(kubectl get -n default svc gitea-http -ojsonpath='{.spec.clusterIP}'
 )
 ```
+
+### Create Repo (will be removed soon)
+
+__TODO__: This might not be needed when the dag repo becomes stable
+
+Create repo called "dag" on <http://gitea-127.0.0.1.sslip.io:30950> and push the current dag repo code to it.
+
+### Argo Apps
 
 Update the DAG App `$DAG_HOME/helm_vars/dag/values.yaml` with values matching to the environment,
 

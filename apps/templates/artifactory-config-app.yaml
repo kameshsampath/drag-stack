@@ -1,29 +1,24 @@
+{{- if .Values.artifactory.enabled }}
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: dag-apps
+  name: artifactory-config
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
   labels:
-    name: dag
+    name: artifactor-config
 spec:
-  project: default
-  source:
-    repoURL: ${GITEA_DAG_REPO}
-    targetRevision:  ${DAG_TARGET_VERSION}
-    path: apps
-    helm:
-      releaseName: dag-apps
-      valueFiles:
-       - ../helm_vars/dag/values.yaml
-      version: v3
+  project: dag-project
 
-  # Destination cluster and namespace to deploy the application
+  source:
+    repoURL: {{ .Values.source.repoURL }}  
+    targetRevision: {{ .Values.source.targetRevision }} 
+    path: k8s/artifactory 
+
   destination:
-    server: https://kubernetes.default.svc
-    # The namespace will only be set for namespace-scoped resources that have not set a value for .metadata.namespace
-    namespace: drone
+    server: {{ .Values.destination.server }}
+    namespace: infra
 
   # Sync policy
   syncPolicy:
@@ -57,3 +52,4 @@ spec:
     kind: "*"
     managedFieldsManagers:
     - kube-controller-manager
+{{- end }}

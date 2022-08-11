@@ -1,0 +1,20 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: infra
+
+resources:
+  - artifactory-config-job.yaml
+
+generatorOptions:
+  disableNameSuffixHash: true
+
+secretGenerator:
+  - name: art-admin-cm
+    literals:
+      - "ADMIN_USER_NAME=admin"
+      - "ADMIN_USER_PASSWORD=password"
+configMapGenerator:
+  - name: art-config
+    files:
+      - "config.xml"

@@ -12,7 +12,7 @@ data:
       giteaURL: http://gitea-http.default:30950/
       users:
         from: 1
-        to: 3
+        to: 1
         oAuthAppName: demo-oauth
         oAuthRedirectURI: http://drone-127.0.0.1.sslip.io:30980
         addKubernetesSecret: true

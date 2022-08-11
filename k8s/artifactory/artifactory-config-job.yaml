@@ -1,0 +1,52 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  labels:
+    app.kubernetes.io/version: "0.0.1"
+  annotations:
+    argocd.argoproj.io/hook: PostSync
+    argocd.argoproj.io/hook-delete-policy: HookSucceeded
+  name: config-artifactory
+spec:
+  backoffLimit: 0
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/version: "0.0.1"
+    spec:
+      initContainers:
+        - name: config-update
+          image: kameshsampath/kube-dev-tools:v0.0.4@sha256:827128f233b90d9c7253c6f4448b9f74a9954bfaa5b85830935ac10bc05c4b61
+          imagePullPolicy: IfNotPresent
+          command:
+            - "bash"
+          args:
+            - "-c"
+            - >
+              until [ "$(curl --retry 10 --retry-delay 6 -o /dev/null -s -w '%{http_code}' artifactory-oss:8081/artifactory )" -lt 400 ]; do printf "."; sleep 5; done;
+      containers:
+        - name: config-artifactory
+          image: kameshsampath/kube-dev-tools:v0.0.4@sha256:827128f233b90d9c7253c6f4448b9f74a9954bfaa5b85830935ac10bc05c4b61
+          imagePullPolicy: IfNotPresent
+          envFrom:
+            - secretRef:
+                name: art-admin-cm
+          env:
+            - name: POD_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+          command:
+            - "bash"
+            - "-c"
+          args:
+            - > 
+               curl -X POST -H 'Content-Type: application/xml' -u "${ADMIN_USER_NAME}:${ADMIN_USER_PASSWORD}"  "artifactory.${POD_NAMESPACE}:8081/artifactory/api/system/configuration" -d @/config/config.xml
+          volumeMounts:
+            - mountPath: /config
+              name: art-config
+      volumes:
+        - name: art-config
+          configMap:
+            name: art-config
+      restartPolicy: Never
