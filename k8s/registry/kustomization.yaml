@@ -4,7 +4,6 @@ commonLabels:
   app: my-registry
 
 resources:
-  - "namespace.yaml"
   - "deployment.yaml"
   - "service.yaml"
   - "ingress.yaml"
