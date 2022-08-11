@@ -31,11 +31,8 @@ spec:
         env:
           - name: DOCKER_HOST
             value: tcp://localhost:2375
-        command:
-          - "bash"
         args:
-          - "-c"
-          - "tail"
-          - "-f"
-          - "/dev/null"
+          - tail
+          - -f
+          - /dev/null
   
