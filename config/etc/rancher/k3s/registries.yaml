@@ -1,0 +1,7 @@
+mirrors:
+  "my-registry.local":
+    endpoint:
+      - "http://${TRAEFIK_LOADBALANCER_IP}:5000"
+configs:
+  "my-registry.local":
+      insecure_skip_verify: true

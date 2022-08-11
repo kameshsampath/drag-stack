@@ -6,6 +6,6 @@ commonLabels:
 resources:
   - "deployment.yaml"
   - "service.yaml"
-  - "ingress.yaml"
+  # - "ingress.yaml"
   - "pvc.yaml"
   - "dind.yaml"
