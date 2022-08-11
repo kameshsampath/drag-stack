@@ -31,6 +31,8 @@ spec:
         env:
           - name: DOCKER_HOST
             value: tcp://localhost:2375
+          - name: MY_REGISTRY_URL
+            value: "my-registry.${TRAEFIK_LOADBALANCER_IP}.sslip.io"
         args:
           - tail
           - -f
