@@ -1,0 +1,16 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: docker-registry-ingress
+  annotations:
+    kubernetes.io/ingress.class: "traefik"
+spec:
+  rules:
+  - host: my-registry.${TRAEFIK_LOADBALANCER_IP}
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: my-registry
+          servicePort: 5000
