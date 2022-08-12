@@ -12,11 +12,6 @@ spec:
         - name: core-dns-patcher
           image: kameshsampath/patch-core-dns:latest
           imagePullPolicy: IfNotPresent
-          command:
-            - bash
-            - -c
-          args:
-            - /scripts/patch-core-dns.sh
           envFrom:
             - configMapRef:
                 name: registry-aliases
