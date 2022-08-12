@@ -1,7 +1,7 @@
 namespace: infra
 
 commonLabels:
-  app: my-registry
+  group: my-registry
 
 resources:
   - "deployment.yaml"

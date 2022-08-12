@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: docker-dind
   labels:
-    use: docker
+    app.kubernetes.io/name: docker-dind
 spec:
   selector:
     matchLabels:

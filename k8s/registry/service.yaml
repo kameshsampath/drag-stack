@@ -4,10 +4,10 @@ kind: Service
 metadata:
   name: my-registry
   labels:
-    run: docker-registry
+    app.kubernetes.io/name: my-registry
 spec:
   selector:
-    app: my-registry
+    app.kubernetes.io/name: my-registry
   ports:
     - protocol: TCP
       port: 5000
