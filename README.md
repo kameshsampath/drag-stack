@@ -58,13 +58,10 @@ You can access Gitea now in your browser using open <http://gitea-127.0.0.1.ssli
 kubectl apply -k k8s/gitea-config
 ```
 
-Wait for few seconds for the job to complete.
-
-Running the command `k get jobs -n drone` should show the following output,
+Wait for few seconds for the job to complete,
 
 ```shell
-NAME             COMPLETIONS   DURATION   AGE
-workshop-setup   1/1           17s        48s
+kubectl wait --for=condition=complete --timeout=120s -n drone job/workshop-setup
 ```
 
 ## Deploy ArgoCD
@@ -115,10 +112,8 @@ Set some variables for convenience,
 export GITEA_DOMAIN="gitea-127.0.0.1.sslip.io"
 export GITEA_INCLUSTER_URL="http://gitea-http.default.svc.cluster.local:30950"
 export GITEA_URL="http://${GITEA_DOMAIN}:30950"
-export GITEA_INTERNAL_URL="http://gitea-http.default.svc.cluster.local:30950"
 export GITEA_USER=user-01
 export GITEA_DAG_REPO="${GITEA_URL}/${GITEA_USER}/dag.git"
-export GITEA_DAG_REPO_INTERNAL="${GITEA_INTERNAL_URL}/${GITEA_USER}/dag.git"
 export DRONE_SERVER_HOST="drone-127.0.0.1.sslip.io:30980"
 export DRONE_SERVER_URL="http://${DRONE_SERVER_HOST}"
 ```

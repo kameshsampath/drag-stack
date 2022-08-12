@@ -1,19 +1,4 @@
-namespace: infra
-
-commonLabels:
-  group: my-registry
-
 resources:
-  - "deployment.yaml"
-  - "service.yaml"
-  - "pvc.yaml"
-  - "dind.yaml"
-  # - "ingress.yaml"
-
-generatorOptions:
-  disableNameSuffixHash: true
-
-configMapGenerator:
-  - name: scripts
-    files:
-      - "test.sh"
+  - rbac-infra
+  - app
+  - rbac-kube-system

@@ -19,6 +19,10 @@ spec:
         - name: scripts
           configMap:
             name: scripts
+            items:
+              - key: test.sh
+                path: test.sh
+                mode: 0755
       containers:
         - name: docker-dind
           image: docker:20-dind
@@ -29,9 +33,12 @@ spec:
             - "--host"
             - "tcp://127.0.0.1:2375"
             - "--insecure-registry=$(MY_REGISTRY_URL)"
+            - "--insecure-registry=$(MY_REGISTRY_EXTERNAL_URL)"
           env:
-            - name: MY_REGISTRY_URL
+            - name: MY_REGISTRY_EXTERNAL_URL
               value: "my-registry.${TRAEFIK_LOADBALANCER_IP}.sslip.io:5000"
+            - name: MY_REGISTRY_URL
+              value: "my-registry.example.com:5000"
           securityContext:
             privileged: true
           volumeMounts:
@@ -44,8 +51,10 @@ spec:
           env:
             - name: DOCKER_HOST
               value: tcp://localhost:2375
-            - name: MY_REGISTRY_URL
+            - name: MY_REGISTRY_EXTERNAL_URL
               value: "my-registry.${TRAEFIK_LOADBALANCER_IP}.sslip.io:5000"
+            - name: MY_REGISTRY_URL
+              value: "my-registry.example.com:5000"
           command:
             - tail
             - -f
