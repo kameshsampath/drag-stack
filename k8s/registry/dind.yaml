@@ -7,11 +7,11 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app: docker-dind
+      app.kubernetes.io/name: docker-dind
   template:
     metadata:
       labels:
-        app: docker-dind
+        app.kubernetes.io/name: docker-dind
     spec:
       volumes:
         - name: storage
