@@ -22,6 +22,6 @@ registries:
   create:
     name: "${REGISTRY_NAME}"
     host: "0.0.0.0"
-    hostPort: "${REGISTRY_PORT}"
+    hostPort: "5001"
     volumes:
       - "${PWD}/.k3s/registry:/var/lib/registry"
