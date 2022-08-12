@@ -23,9 +23,9 @@ spec:
           args:
             - "-c"
             - >
-              while ! curl --silent --fail --output /dev/null -s -w '%{http_code}' artifactory.infra:8081/artifactory )" -lt 400 
+              until [ "$(curl --silent --fail --output /dev/null -w '%{http_code}' http://artifactory.infra:8081/artifactory)" -lt 400 ]
               do
-                  sleep 5
+                sleep 5
               done
       containers:
         - name: config-artifactory
