@@ -23,7 +23,10 @@ spec:
           args:
             - "-c"
             - >
-              until [ "$(curl --retry 10 --retry-delay 6 -o /dev/null -s -w '%{http_code}' artifactory-oss:8081/artifactory )" -lt 400 ]; do printf "."; sleep 5; done;
+              while ! curl --silent --fail --output /dev/null -s -w '%{http_code}' artifactory.infra:8081/artifactory )" -lt 400 
+              do
+                  sleep 5
+              done
       containers:
         - name: config-artifactory
           image: kameshsampath/kube-dev-tools:v0.0.4@sha256:827128f233b90d9c7253c6f4448b9f74a9954bfaa5b85830935ac10bc05c4b61
