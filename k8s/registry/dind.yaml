@@ -2,6 +2,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: docker-dind
+  labels:
+    use: docker
 spec:
   selector:
     matchLabels:
@@ -12,29 +14,42 @@ spec:
         app: docker-dind
     spec:
       volumes:
-      - name: storage
-        emptyDir: {}
+        - name: storage
+          emptyDir: {}
+        - name: scripts
+          configMap:
+            name: scripts
       containers:
-      - name: docker-dind
-        image: docker:20-dind
-        imagePullPolicy: IfNotPresent
-        command: ["dockerd", "--host", "tcp://127.0.0.1:2375"]
-        securityContext:
-          privileged: true
-        volumeMounts:
-          - name: storage
-            mountPath: /var/lib/docker
-            subPath: docker
-      - name: tools
-        image: kameshsampath/kube-dev-tools:v0.0.4
-        imagePullPolicy: IfNotPresent
-        env:
-          - name: DOCKER_HOST
-            value: tcp://localhost:2375
-          - name: MY_REGISTRY_URL
-            value: "my-registry.${TRAEFIK_LOADBALANCER_IP}.sslip.io"
-        command:
-          - tail
-          - -f
-          - /dev/null
-  
+        - name: docker-dind
+          image: docker:20-dind
+          imagePullPolicy: IfNotPresent
+          command:
+            - "dockerd"
+          args:
+            - "--host"
+            - "tcp://127.0.0.1:2375"
+            - "--insecure-registry=$(MY_REGISTRY_URL)"
+          env:
+            - name: MY_REGISTRY_URL
+              value: "my-registry.local"
+          securityContext:
+            privileged: true
+          volumeMounts:
+            - name: storage
+              mountPath: /var/lib/docker
+              subPath: docker
+        - name: tools
+          image: kameshsampath/kube-dev-tools:v0.0.4
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: DOCKER_HOST
+              value: tcp://localhost:2375
+            - name: MY_REGISTRY_URL
+              value: "my-registry.local"
+          command:
+            - tail
+            - -f
+            - /dev/null
+          volumeMounts:
+            - mountPath: /scripts
+              name: scripts

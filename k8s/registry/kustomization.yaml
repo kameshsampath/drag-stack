@@ -9,3 +9,8 @@ resources:
   - "pvc.yaml"
   - "dind.yaml"
   # - "ingress.yaml"
+
+configMapGenerator:
+  - name: scripts
+    files:
+      - "test.sh"
