@@ -34,6 +34,10 @@ spec:
           {{- range .Values.drone.docker.runner.insecureRegistries }}
           - insecure-registry={{ . }}
           {{- end }}
+        extraSecretNamesForEnvFrom:
+          # all the other as $PROJECT_HOME/k8s/.env variables are loaded via this secret
+          # https://docs.drone.io/server/reference/
+          - {{ .Values.gitea.oAuthSecret }}
         env:
           DRONE_RPC_HOST: "drone:30980"
 
