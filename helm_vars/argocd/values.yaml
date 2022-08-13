@@ -1,6 +1,5 @@
 global:
   image:
-    repository: "k3d-quay-io-proxy:5200/argoproj/argocd"
     tag: "v2.4.9"
   hostAliases:
    - ip: "${GITEA_HTTP_CLUSTER_IP}"
