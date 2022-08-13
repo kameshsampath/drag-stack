@@ -28,7 +28,8 @@ drone:
       version: 0.1.10
   docker:
     runner:
-      version: 0.1.0
+      version: 0.2.0
+      insecureRegistries: []
   # Drone Helm Chart settings
   server:
     # the chart version

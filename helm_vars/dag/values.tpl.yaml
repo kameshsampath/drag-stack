@@ -11,6 +11,10 @@ gitea:
   username: ${GITEA_USER}
   password: ${GITEA_USER}@123
 drone:
+  docker:
+    runner: 
+      insecureRegistries:
+        - "k3d-${REGISTRY_NAME}:${REGISTRY_PORT}"
   server:
     version: 0.6.0
     host: ${DRONE_SERVER_URL}

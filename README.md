@@ -24,9 +24,20 @@ All linux distributions adds **envsubst** via [gettext](https://www.gnu.org/soft
 ## Clone the Sources
 
 ```shell
-git clone https://github.com/kameshsampath/dag && \
-  cd "$(basename "$_" .git)"
-export DAG_HOME="${PWD}"
+git clone https://github.com/kameshsampath/dag-stack && \
+  cd "$(basename "$_" .git)" && direnv allow .
+```
+
+Lets check out the `k3d` branch of the stack,
+
+```shell
+git checkout -b k3d origin/k3d
+```
+
+As instructed lets reset the environment,
+
+```shell
+direnv allow .
 ```
 
 ## Create Kubernetes Cluster
@@ -52,18 +63,6 @@ $DAG_HOME/hack/check-gitea
 ```
 
 You can access Gitea now in your browser using open <http://gitea-127.0.0.1.sslip.io:30950>. Default credentials `demo/demo@123`.
-
-### Configure Gitea
-
-```shell
-kubectl apply -k k8s/gitea-config
-```
-
-Wait for few seconds for the job to complete,
-
-```shell
-kubectl wait --for=condition=complete --timeout=120s -n drone job/workshop-setup
-```
 
 ## Deploy ArgoCD
 

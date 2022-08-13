@@ -1,13 +1,13 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: drone-kube-runner
+  name: drone-docker-runner
   namespace: argocd
   # Add this finalizer ONLY if you want these to cascade delete.
   finalizers:
     - resources-finalizer.argocd.argoproj.io
   labels:
-    name: drone-runner-kube
+    name: drone-docker-runner
 spec:
   project: dag-project
   source:
@@ -15,8 +15,8 @@ spec:
 
     # Using the Charts Repo
     repoURL: https://charts.drone.io 
-    targetRevision: {{ .Values.drone.kube.runner.version }} 
-    chart: drone-runner-kube  
+    targetRevision: {{ .Values.drone.docker.runner.version }} 
+    chart: drone-runner-docker  
 
     # Using Git Repo this has patch for hostAliases
     # TODO: set to official repo once the PR is merged
@@ -25,16 +25,15 @@ spec:
     # path: charts/drone-runner-kube
 
     helm:
-      releaseName: drone-runner-kube
-      # TODO move to public repo in case you want to use values file 
-      # over the inline values
-      # valueFiles:
-      # - values-prod.yaml
+      releaseName: drone-runner-docker
       values: |
-        extraSecretNamesForEnvFrom:
-          # all the other as $PROJECT_HOME/k8s/.env variables are loaded via this secret
-          # https://docs.drone.io/server/reference/
-          - {{ .Values.gitea.oAuthSecret }}
+        dindCommand:
+          - dockerd
+          - --host
+          - tcp://127.0.0.1:2375
+          {{- range .Values.drone.docker.runner.insecureRegistries }}
+          - insecure-registry={{ . }}
+          {{- end }}
         env:
           DRONE_RPC_HOST: "drone:30980"
 
