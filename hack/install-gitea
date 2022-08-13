@@ -28,4 +28,5 @@ http --ignore-stdin POST "$GITEA_URL/api/v1/repos/migrate" \
   repo_owner="${GITEA_USER}" \
   clone_addr="https://github.com/kameshsampath/dag-stack"
 
+git remote rename origin upstream
 git remote add origin "${GITEA_DAG_REPO}"
