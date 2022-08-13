@@ -25,11 +25,11 @@ registries:
       hostPort: "5001"
       volumes:
         - "/Users/kameshs/MyLabs/.k3s/registry:/var/lib/registry"
-  config: |
-      mirrors:
-        "docker.io":
-           endpoint:
-             - "http://k3d-docker-io-proxy:5100"
-        "quay.io":
-           endpoint:
-             - "http://k3d-quay-io-proxy:5200"
+#  config: |
+#      mirrors:
+#        "docker.io":
+#           endpoint:
+#             - "http://k3d-docker-io-proxy:5100"
+#        "quay.io":
+#           endpoint:
+#             - "http://k3d-quay-io-proxy:5200"

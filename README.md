@@ -70,21 +70,7 @@ You can access Gitea now in your browser using open <http://gitea-127.0.0.1.ssli
 $DAG_HOME/hack/install-argocd
 ```
 
-```shell
-export GITEA_HTTP_CLUSTER_IP=$(kubectl get -n default svc gitea-http -ojsonpath='{.spec.clusterIP}'
-)
-```
-
-Deploy argocd server,
-
-```shell
-envsubst < $DAG_HOME/helm_vars/argocd/values.yaml | helm upgrade --install argocd argo/argo-cd \
-  --namespace=argocd \
-  --wait \
-  --values -
-```
-
-You can access Argo CD now in your browser using open <http://localhost:30080>. Default credentials `admin/demo@123`.
+You can access Argo CD now in your browser using open <http://argocd-127.0.0.1.sslip.io:30080>. Default credentials `admin/demo@123`.
 
 ## Cluster Bootstrapping
 

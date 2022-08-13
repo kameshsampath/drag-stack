@@ -35,7 +35,7 @@ spec:
             - "--insecure-registry=$(MY_REGISTRY_URL)"
           env:
             - name: MY_REGISTRY_URL
-              value: "k3d-myregistry.localhost:5000"
+              value: "${REGISTRY_HOST}:${REGISTRY_PORT}"
           securityContext:
             privileged: true
           volumeMounts:
@@ -49,7 +49,7 @@ spec:
             - name: DOCKER_HOST
               value: tcp://localhost:2375
             - name: MY_REGISTRY_URL
-              value: "my-registry.example.com:5000"
+              value: "${REGISTRY_HOST}:${REGISTRY_PORT}"
           command:
             - tail
             - -f

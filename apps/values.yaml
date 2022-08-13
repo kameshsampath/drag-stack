@@ -21,6 +21,7 @@ gitea:
   username: user-01
   # the gitea password
   password: user-01@123
+  patchDroneHostAliases: true
 # Drone settings
 drone:
   kube:

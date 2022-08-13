@@ -4,28 +4,28 @@ set -euo pipefail
 
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
-create_reg=$(k3d registry ls -o json  | jq -r 'any(.[]; .name == "k3d-docker-io-proxy")')
-# k3d registries are suffixed with k3d-
-if [ "$create_reg" == "false" ];
-then
-  k3d registry create docker-io-proxy \
-    --port 0.0.0.0:5100 \
-    --proxy-remote-url https://registry-1.docker.io \
-    --proxy-username "$DOCKERHUB_USERNAME" \
-    --proxy-password "$DOCKERHUB_PASSWORD" \
-    --volume "/Users/kameshs/MyLabs/.k3s/registry:/var/lib/registry"
-fi
+# create_reg=$(k3d registry ls -o json  | jq -r 'any(.[]; .name == "k3d-docker-io-proxy")')
+# # k3d registries are suffixed with k3d-
+# if [ "$create_reg" == "false" ];
+# then
+#   k3d registry create docker-io-proxy \
+#     --port 0.0.0.0:5100 \
+#     --proxy-remote-url https://registry-1.docker.io \
+#     --proxy-username "$DOCKERHUB_USERNAME" \
+#     --proxy-password "$DOCKERHUB_PASSWORD" \
+#     --volume "/Users/kameshs/MyLabs/.k3s/registry:/var/lib/registry"
+# fi
 
-create_reg=$(k3d registry ls -o json  | jq -r 'any(.[]; .name == "k3d-quay-io-proxy")')
-if [ "$create_reg" == "false" ];
-then
-  k3d registry create quay-io-proxy \
-    --port 0.0.0.0:5200 \
-    --proxy-remote-url https://quay.io \
-    --proxy-username "$QUAYIO_USERNAME" \
-    --proxy-password "$QUAYIO_PASSWORD" \
-    --volume "/Users/kameshs/MyLabs/.k3s/registry:/var/lib/registry"
-fi
+# create_reg=$(k3d registry ls -o json  | jq -r 'any(.[]; .name == "k3d-quay-io-proxy")')
+# if [ "$create_reg" == "false" ];
+# then
+#   k3d registry create quay-io-proxy \
+#     --port 0.0.0.0:5200 \
+#     --proxy-remote-url https://quay.io \
+#     --proxy-username "$QUAYIO_USERNAME" \
+#     --proxy-password "$QUAYIO_PASSWORD" \
+#     --volume "/Users/kameshs/MyLabs/.k3s/registry:/var/lib/registry"
+# fi
 
 # create a cluster with the local registry enabled in containerd
 # https://k3d.io/v5.4.4/usage/configfile/

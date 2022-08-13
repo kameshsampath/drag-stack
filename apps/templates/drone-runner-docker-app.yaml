@@ -14,25 +14,29 @@ spec:
     # Can point to either a Helm chart repo or a git repo.
 
     # Using the Charts Repo
-    repoURL: https://charts.drone.io 
-    targetRevision: {{ .Values.drone.docker.runner.version }} 
-    chart: drone-runner-docker  
+    # repoURL: https://charts.drone.io 
+    # targetRevision: {{ .Values.drone.docker.runner.version }} 
+    # chart: drone-runner-docker  
 
     # Using Git Repo this has patch for hostAliases
     # TODO: set to official repo once the PR is merged
-    # repoURL: https://github.com/kameshsampath/drone-charts.git  
-    # targetRevision:  {{ .Values.drone.server.version }}
-    # path: charts/drone-runner-kube
+    repoURL: https://github.com/kameshsampath/drone-charts.git  
+    targetRevision:  dind-command-improvements 
+    path: charts/drone-runner-docker  
 
     helm:
       releaseName: drone-runner-docker
       values: |
-        dindCommand:
-          - dockerd
+        {{- with .Values.drone.server.hostAliases }}
+        hostAliases:
+          {{- toYaml . | nindent 10 }}
+        {{- end }}
+        dindCommandArgs:
           - --host
           - tcp://127.0.0.1:2375
           {{- range .Values.drone.docker.runner.insecureRegistries }}
-          - insecure-registry={{ . }}
+          - --insecure-registry
+          - {{ . }}
           {{- end }}
         extraSecretNamesForEnvFrom:
           # all the other as $PROJECT_HOME/k8s/.env variables are loaded via this secret

@@ -14,7 +14,7 @@ drone:
   docker:
     runner: 
       insecureRegistries:
-        - "k3d-${REGISTRY_NAME}:${REGISTRY_PORT}"
+        - "${REGISTRY_NAME}:${REGISTRY_PORT}"
   server:
     version: 0.6.0
     host: ${DRONE_SERVER_URL}
@@ -30,9 +30,9 @@ argocd:
     versio: 0.8.0
     logLevel: debug
     registries:
-      - name: "k3d-${REGISTRY_NAME}"
-        prefix: "k3d-${REGISTRY_NAME}:${REGISTRY_PORT}"
-        api_url: "http://k3d-${REGISTRY_NAME}:${REGISTRY_PORT}"
+      - name: "${REGISTRY_NAME}"
+        prefix: "${REGISTRY_NAME}:${REGISTRY_PORT}"
+        api_url: "http://${REGISTRY_NAME}:${REGISTRY_PORT}"
         default: true
         defaultns: example
         insecure: true
