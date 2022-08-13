@@ -1,0 +1,13 @@
+Argo CD
+=======
+http://argocd-127.0.0.1.sslip.io:30080
+
+
+Gitea
+=====
+http://gitea-127.0.0.1.sslip.io:30950
+
+
+Drone
+=====
+http://drone-127.0.0.1.sslip.io:30980

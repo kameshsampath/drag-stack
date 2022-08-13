@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+
+set -euxo pipefail
+
+direnv allow .
+
+# Deploy Gitea
+helm repo add gitea-charts https://dl.gitea.io/charts/
+helm repo update
+
+helm upgrade \
+  --install gitea gitea-charts/gitea \
+  --values "$DAG_HOME/helm_vars/gitea/values.yaml" \
+  --wait
+
+# Create the default user user-01 and configure the user with default git repos
+kubectl apply -k k8s/gitea-config
+kubectl wait --for=condition=complete --timeout=60s -n drone job/workshop-setup
+
+# Get the Access token
+ACCESS_TOKEN=$(http --ignore-stdin -a "${GITEA_USER}:${GITEA_USER}@123" POST "$GITEA_URL/api/v1/users/${GITEA_USER}/tokens" name="oauth-configure-$(date +%s%N)" | jq -r '.sha1')
+
+# Create default dag repo
+# TODO remove this when job add the dag-stack
+http --ignore-stdin POST "$GITEA_URL/api/v1/repos/migrate" \
+  "Authorization: token ${ACCESS_TOKEN}" \
+  repo_name="dag" \
+  repo_owner="${GITEA_USER}" \
+  clone_addr="https://github.com/kameshsampath/dag-stack"
+
+git remote add origin "${GITEA_DAG_REPO}"
