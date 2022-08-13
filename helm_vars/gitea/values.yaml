@@ -1,3 +1,8 @@
+image:
+  registry: "k3d-docker-io-proxy:5000"
+  tag: "1.17.0"
+  pullPolicy: IfNotPresent
+
 service:
   http:
     # the Kubernetes service gitea-http'  service type

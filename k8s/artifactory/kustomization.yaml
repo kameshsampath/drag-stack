@@ -18,3 +18,7 @@ configMapGenerator:
   - name: art-config
     files:
       - "config.xml"
+  - name: scripts
+    files:
+      - "health.sh"
+      - "update.sh"

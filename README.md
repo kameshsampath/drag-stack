@@ -42,12 +42,13 @@ The following section details on how to deploy Gitea, which will be used as our 
 ### Deploy Gitea
 
 ```shell
-helm repo add gitea-charts https://dl.gitea.io/charts/
-helm repo update
-helm upgrade \
-  --install gitea gitea-charts/gitea \
-  --values $DAG_HOME/helm_vars/gitea/values.yaml \
-  --wait
+$DAG_HOME/hack/install-gitea
+```
+
+#### Verify Gitea
+
+```shell
+$DAG_HOME/hack/check-gitea
 ```
 
 You can access Gitea now in your browser using open <http://gitea-127.0.0.1.sslip.io:30950>. Default credentials `demo/demo@123`.
@@ -66,17 +67,8 @@ kubectl wait --for=condition=complete --timeout=120s -n drone job/workshop-setup
 
 ## Deploy ArgoCD
 
-Deploy Argocd, create namespace to deploy argocd
-
 ```shell
-kubectl create ns argocd
-```
-
-Add argocd helm repo,
-
-```shell
-helm repo add argo https://argoproj.github.io/argo-helm
-helm repo update
+$DAG_HOME/hack/install-argocd
 ```
 
 ```shell

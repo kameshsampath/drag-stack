@@ -1,5 +1,5 @@
-#!/bin/sh
-set -o errexit
+#!/usr/bin/env bash
+set -euxo pipefail
 
 # create registry container unless it already exists
 reg_name='kind-registry'
