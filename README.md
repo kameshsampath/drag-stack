@@ -1,6 +1,6 @@
 # Drone Argo CD Gitea(DAG) Stack
 
-A demo to demonstrate on how to setup [Drone](https://drone.io), [Argo CD](https://argo-cd.readthedocs.io/) and [Gitea](https://gitea.io/) with [kind](https://kind.sigs.k8s.io/) as your local Kubernetes Cluster.
+A demo to demonstrate on how to setup [Drone](https://drone.io), [Argo CD](https://argo-cd.readthedocs.io/) and [Gitea](https://gitea.io/) with [k3d](k3d.io/) as your local **[k3s](https://k3s.io)** based Kubernetes Cluster.
 
 This demo also shows how to use the Argo CD [declarative setup](https://argo-cd.readthedocs.io/en/stable/operator-manual/declarative-setup/) to setup [Drone](https://drone.io) with Drone Kubernetes runner.
 
@@ -89,61 +89,12 @@ You can access Argo CD now in your browser using open <http://localhost:30080>. 
 
 ## Cluster Bootstrapping
 
-The cluster bootstrapping installs the core DAG stack applications ([App of Apps](https://argo-cd.readthedocs.io/en/stable/operator-manual/declarative-setup/#app-of-apps)) and DAG stack has the following child applications,
+The cluster bootstrapping  that we did in earlier step installs the core DAG stack applications ([App of Apps](https://argo-cd.readthedocs.io/en/stable/operator-manual/declarative-setup/#app-of-apps)) and DAG stack has the following child applications,
 
 - Argo CD Image Updater
 - Drone Server
 - Droner Runners
 - Nexus3 Maven Repository Manager
-
-### Setup Environment
-
-Set some variables for convenience,
-
-```shell
-export GITEA_DOMAIN="gitea-127.0.0.1.sslip.io"
-export GITEA_INCLUSTER_URL="http://gitea-http.default.svc.cluster.local:30950"
-export GITEA_URL="http://${GITEA_DOMAIN}:30950"
-export GITEA_USER=user-01
-export GITEA_DAG_REPO="${GITEA_URL}/${GITEA_USER}/dag.git"
-export DRONE_SERVER_HOST="drone-127.0.0.1.sslip.io:30980"
-export DRONE_SERVER_URL="http://${DRONE_SERVER_HOST}"
-```
-
-Verify we have the `${GITEA_HTTP_CLUSTER_IP}` variable set,
-
-```shell
-export GITEA_HTTP_CLUSTER_IP=$(kubectl get -n default svc gitea-http -ojsonpath='{.spec.clusterIP}'
-)
-```
-
-### Create Repo (will be removed soon)
-
-__TODO__: This might not be needed when the dag repo becomes stable
-
-Create repo called "dag" on <http://gitea-127.0.0.1.sslip.io:30950> and push the current dag repo code to it.
-
-### Argo Apps
-
-Update the DAG App `$DAG_HOME/helm_vars/dag/values.yaml` with values matching to the environment,
-
-```shell
-envsubst < $DAG_HOME/helm_vars/dag/values.tpl.yaml > $DAG_HOME/helm_vars/dag/values.yaml
-```
-
-Commit and push the code to `${GITEA_DAG_REPO}` so that values will be used by the DAG apps argo application that we will create in the next step,
-
-Create DAG App on ArgoCD,
-
-```shell
-envsubst < $DAG_HOME/k8s/dag/app.yaml | kubectl apply -f -
-```
-
-Trigger app sync
-
-```shell
-argocd app sync dag-apps  
-```
 
 A successful ArgoCD Deployment of Drone should look as shown below,
 
