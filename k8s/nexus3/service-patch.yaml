@@ -4,4 +4,5 @@
     name: registry-port
     nodePort: 31081
     protocol: TCP
+    port: 18081
     targetPort: 18081
