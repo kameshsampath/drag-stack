@@ -21,7 +21,6 @@ gitea:
   username: user-01
   # the gitea password
   password: user-01@123
-  patchDroneHostAliases: true
 # Drone settings
 drone:
   kube:
@@ -29,7 +28,7 @@ drone:
       version: 0.1.10
   docker:
     runner:
-      version: 0.2.0
+      version: 0.3.0
       insecureRegistries: []
   # Drone Helm Chart settings
   server:
@@ -47,8 +46,6 @@ drone:
       #   - gitea-127.0.0.1.sslip.io
     admin:
       enable: false
-artifactory:
-  enabled: false
 argocd:
   imageUpdater:
     version: 0.8.0

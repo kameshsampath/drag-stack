@@ -2,7 +2,7 @@ destination:
   server: https://kubernetes.default.svc
 source:
   repoURL: http://gitea-127.0.0.1.sslip.io:30950/user-01/dag.git
-  targetRevision: k3s
+  targetRevision: k3d
 gitea:
   server:
     outClusterURL: http://gitea-127.0.0.1.sslip.io:30950
@@ -11,12 +11,16 @@ gitea:
   username: user-01
   password: user-01@123
 drone:
+  docker:
+    runner: 
+      insecureRegistries:
+        - "k3d-myregistry.localhost:5000"
   server:
     version: 0.6.0
     host: http://drone-127.0.0.1.sslip.io:30980
     namespace: drone
     hostAliases:
-      - ip: 10.43.175.122
+      - ip: 10.43.247.135
         hostnames:
           - gitea-127.0.0.1.sslip.io
     admin:
@@ -26,9 +30,9 @@ argocd:
     versio: 0.8.0
     logLevel: debug
     registries:
-      - name: "k3d-k3d-myregistry.localhost"
-        prefix: "k3d-k3d-myregistry.localhost:5000"
-        api_url: "http://k3d-k3d-myregistry.localhost:5000"
+      - name: "k3d-myregistry.localhost"
+        prefix: "k3d-myregistry.localhost:5000"
+        api_url: "http://k3d-myregistry.localhost:5000"
         default: true
         defaultns: example
         insecure: true
