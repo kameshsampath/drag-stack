@@ -14,3 +14,11 @@ configMapGenerator:
       - "ANONYMOUS_ACCESS=false"
       - "NEXUS_NS=infra"
       - "NEXUS_DEPLOYMENT=nexus3"
+
+patchesJson6902:
+  - target:
+      group: batch
+      version: v1
+      kind: Job
+      name: configure-nexus
+    path: ./job-patch.yaml
