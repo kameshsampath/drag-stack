@@ -1,7 +1,6 @@
 - op: add
   path: "/spec/ports/-"
   value:
-    name: registry-port
     nodePort: 31081
     protocol: TCP
     port: 18081
