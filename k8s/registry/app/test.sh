@@ -1,6 +1,10 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 set -euxo pipefail
+ 
+echo -n "${DOLLAR}IMAGE_REGISTRY_PASSWORD" | \
+  docker login "${DOLLAR}MY_REGISTRY_URL" \
+    --username "${DOLLAR}IMAGE_REGISTRY_USER" --password-stdin
 
 # Internal 
 docker pull gcr.io/google-samples/hello-app:1.0

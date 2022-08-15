@@ -31,11 +31,14 @@ spec:
             - "dockerd"
           args:
             - "--host"
-            - "tcp://127.0.0.1:2375"
+            - "tcp://localhost:2375"
             - "--insecure-registry=$(MY_REGISTRY_URL)"
           env:
             - name: MY_REGISTRY_URL
-              value: "${REGISTRY_HOST}:${REGISTRY_PORT}"
+              value: "${REGISTRY_NAME}:${REGISTRY_PORT}"
+          envFrom:
+            - secretRef:
+                name: registry-config
           securityContext:
             privileged: true
           volumeMounts:
@@ -43,13 +46,16 @@ spec:
               mountPath: /var/lib/docker
               subPath: docker
         - name: tools
-          image: kameshsampath/kube-dev-tools:v0.0.4
+          image: kameshsampath/kube-dev-tools:v0.0.6
           imagePullPolicy: IfNotPresent
           env:
             - name: DOCKER_HOST
               value: tcp://localhost:2375
             - name: MY_REGISTRY_URL
-              value: "${REGISTRY_HOST}:${REGISTRY_PORT}"
+              value: "${REGISTRY_NAME}:${REGISTRY_PORT}"
+          envFrom:
+            - secretRef:
+                name: registry-config
           command:
             - tail
             - -f
