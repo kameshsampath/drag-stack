@@ -3,5 +3,5 @@
   value:
     name: registry-port
     nodePort: 31081
-    portocol: TCP
+    protocol: TCP
     targetPort: 18081
