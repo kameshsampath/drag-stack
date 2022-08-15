@@ -6,3 +6,11 @@ namespace: infra
 resources:
   - https://github.com/kameshsampath/kube-dev-utils//nexus3?ref=main
 
+configMapGenerator:
+  - name: nexus3-config
+    behavior: merge
+    literals:
+      - "NEXUS_URL=http://nexus.infra.svc.cluster.local:8081"
+      - "ANONYMOUS_ACCESS=false"
+      - "NEXUS_NS=infra"
+      - "NEXUS_DEPLOYMENT=nexus3"
