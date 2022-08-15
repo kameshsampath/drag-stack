@@ -13,7 +13,7 @@ spec:
   source:
     repoURL: {{ .Values.source.repoURL }}
     targetRevision: {{ .Values.source.targetRevision }}
-    path: nexus3
+    path: k8s/nexus3
 
     # any kustomize transformation
     # kustomize:
