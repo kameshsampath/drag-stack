@@ -16,7 +16,7 @@ spec:
     path: nexus3
 
     # any kustomize transformation
-    kustomize:
+    # kustomize:
   
   destination:
     server: {{ .Values.destination.server }}
