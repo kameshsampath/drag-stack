@@ -11,8 +11,8 @@ metadata:
 spec:
   project: dag-project
   source:
-    repoURL: {{ .Values.sourece.repoURL }}
-    targetRevision: {{ .Values.sourece.targetRevision }}
+    repoURL: {{ .Values.source.repoURL }}
+    targetRevision: {{ .Values.source.targetRevision }}
     path: nexus3
 
     # any kustomize transformation
