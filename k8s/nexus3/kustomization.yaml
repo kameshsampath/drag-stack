@@ -22,3 +22,8 @@ patchesJson6902:
       kind: Job
       name: configure-nexus
     path: ./job-patch.yaml
+  - target:
+      kind: Service
+      version: v1
+      name: nexus
+    path: ./service-patch.yaml
