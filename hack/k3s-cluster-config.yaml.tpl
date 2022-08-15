@@ -18,8 +18,12 @@ ports:
   - port: 127.0.0.1:30080:30080
     nodeFilters:
      - loadbalancer
-  # Nexus3 Repo Manager and Registry
+  # Nexus3 Repo Manager
   - port: 127.0.0.1:30081:30081
+    nodeFilters:
+     - loadbalancer
+  # Nexus3 Container Registry
+  - port: 127.0.0.1:31081:31081
     nodeFilters:
      - loadbalancer
 registries:

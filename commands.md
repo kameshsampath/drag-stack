@@ -38,3 +38,25 @@ domain localhost
 search_order 1
 EOF
 ```
+
+## nexus3 registry
+
+Append ports (if not)
+
+```shell
+k3d cluster edit dag --port-add 127.0.0.1:31081:31081
+```
+
+Login to registry,
+
+```shell
+docker login localhost:31081
+```
+
+Push image
+
+```shell
+docker pull alpine
+docker tag alpine localhost:31081/example/alpine
+docker push localhost:31081/example/alpine
+```
