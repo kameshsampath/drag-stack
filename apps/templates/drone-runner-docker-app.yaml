@@ -40,7 +40,7 @@ spec:
             - {{ . }}
             {{- end }}
             - --mtu
-            - {{ int .Values.drone.docker.runner.mtu }}
+            - {{ .Values.drone.docker.runner.mtu }}
         extraSecretNamesForEnvFrom:
           # all the other as $PROJECT_HOME/k8s/.env variables are loaded via this secret
           # https://docs.drone.io/server/reference/
