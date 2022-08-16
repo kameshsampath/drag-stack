@@ -3,6 +3,9 @@ kind: Kustomization
 
 namespace: infra
 
+commonLabels:
+  test: nexus
+
 resources:
   - https://github.com/kameshsampath/kube-dev-utils//nexus3?ref=main
 
