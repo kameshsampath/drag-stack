@@ -28,12 +28,6 @@ git clone https://github.com/kameshsampath/dag-stack && \
   cd "$(basename "$_" .git)" && direnv allow .
 ```
 
-Lets check out the `k3d` branch of the stack,
-
-```shell
-git checkout -b k3d origin/k3d
-```
-
 As instructed lets reset the environment,
 
 ```shell
@@ -46,20 +40,10 @@ direnv allow .
 $DAG_HOME/hack/cluster.sh
 ```
 
-## Gitea
-
-The following section details on how to deploy Gitea, which will be used as our git repository enabling GitOps.
-
 ### Deploy Gitea
 
 ```shell
 $DAG_HOME/hack/install-gitea
-```
-
-#### Verify Gitea
-
-```shell
-$DAG_HOME/hack/check-gitea
 ```
 
 You can access Gitea now in your browser using open <http://gitea-127.0.0.1.sslip.io:30950>. Default credentials `demo/demo@123`.
@@ -85,20 +69,7 @@ A successful ArgoCD Deployment of Drone should look as shown below,
 
 ![ArgoCD Apps](./docs/images/dag_apps.png)
 
-## Patching Gitea
-
-As we configured Drone to reach gitea using `hostAliases` we also need to configure gitea pods to reach to drone server using Kubernetes internal DNS,
-
-```shell
-export DRONE_SERVICE_IP="$(kubectl get svc -n drone drone -ojsonpath='{.spec.clusterIP}')"
-kubectl patch statefulset gitea -n default --patch "$(envsubst<$DAG_HOME/k8s/gitea/patch.json)"
-```
-
-Wait for the gitea pods to be ready
-
-```shell
-kubectl rollout status -n default statefulset gitea --timeout=30s
-```
+## Verify Gitea Patch
 
 Verify the `/etc/hosts` entries in the gitea pods,
 
@@ -130,40 +101,7 @@ Copy the account settings named `Example CLI Usage` from the Drone Account Setti
 drone info
 ```
 
-Update the DAG App `$DAG_HOME/helm_vars/dag/values.yaml` with values matching to the environment,
-
-```shell
-export ENABLE_DRONE_ADMIN=true
-envsubst < $DAG_HOME/helm_vars/dag/values.tpl.yaml > $DAG_HOME/helm_vars/dag/values.yaml
-```
-
-### Deploy Quickstart App
-
-Let us now login to the Drone Server <http://drone-127.0.0.1.sslip.io:30980/>, follow on screen wizard to login and authorize Drone via Gitea.
-
-**NOTE**: The default Gitea credentials is like `<user-name>/<user-name@123>`
-
-If all went well you should the Drone Dashboard like,
-
-![Drone Dashboard](./docs/images/drone_dashboard.png)
-
-To ensure our setup works let us click on the `drone-quickstart` project and activate it. You should not see any builds now.
-
-Clone and edit the `drone-quickstart` project and 
-
-- update the type of the pipeline to be `kubernetes`
-- add [host_aliases](https://docs.drone.io/pipeline/kubernetes/syntax/hostaliases/) to the `.drone.yml` as shown below
-
-```yaml
-host_aliases:
- - ip: $GITEA_HTTP_CLUSTER_IP
-   hostnames:
-     - gitea-127.0.0.1.sslip.io
-```
-
-Commit and push the code to see the build trigger, you check the build status in the Drone Dashboard,
-
-![Drone Build Success](./docs/images/validation_success.png)
+### Do some GitOps
 
 **Congratulations**!!! You are now a GitOpsian. Add other projects of yours and keep rocking with Drone CI and Argo CD.
 
@@ -174,10 +112,10 @@ Few applications that you can try with this stack,
 
 ## Gotchas
 
-If you are doing local setup with Kind make sure to check the [setup gotchas](./gotchas.md)for some key details.
+Captured some learnings in [gotchas](./gotchas.md) for pointers and helpful commands.
 
 ## Clean up
 
 ```shell
-kind delete cluster --name=dag
+k3d -c hack/k3s-cluster-config.yaml
 ```

@@ -37,5 +37,3 @@ argocd:
         defaultns: example
         insecure: true
         credentials: "secret:infra/${NEXUS_ADMIN_CREDENTIALS_SECRET}#creds"
-registry:
-  enabled: false

@@ -1,4 +1,0 @@
-# TODOS
-
-- Pushing to local Docker registry with Argo CD able to pull the images 
-- Add drone pipeline to build and set this entire stack : https://github.com/k3d-io/k3d-demo/blob/main/.drone.yml

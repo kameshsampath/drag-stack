@@ -12,4 +12,5 @@ work/**
 !work/.envrc
 .k3s
 hack/*.yaml
+hack/registries.yaml
 *.code-workspace
