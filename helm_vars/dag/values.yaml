@@ -14,13 +14,13 @@ drone:
   docker:
     runner:
       insecureRegistries:
-        - "nexus.infra.svc.cluster.local:31081"
+        - "nexus.infra.svc.cluster.local"
   server:
     version: 0.6.0
     host: http://drone-127.0.0.1.sslip.io:30980
     namespace: drone
     hostAliases:
-      - ip: 10.43.15.232
+      - ip: 10.43.99.186
         hostnames:
           - gitea-127.0.0.1.sslip.io
     admin:
@@ -37,3 +37,5 @@ argocd:
         defaultns: example
         insecure: true
         credentials: "secret:infra/nexus3-config-c29mh65cmb#creds"
+registry:
+  enabled: false
