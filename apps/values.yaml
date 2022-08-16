@@ -52,3 +52,5 @@ argocd:
     version: 0.8.0
     logLevel: info
     registries: []
+registry:
+  enabled: true

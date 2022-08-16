@@ -36,5 +36,5 @@ argocd:
         default: true
         defaultns: example
         insecure: true
-artifactory:
-    enabled: true
+registry:
+  enabled: true
