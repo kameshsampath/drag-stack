@@ -14,7 +14,7 @@ drone:
   docker:
     runner:
       insecureRegistries:
-        - "nexus.infra:18081"
+        - "nexus.infra.svc.cluster.local:18081"
   server:
     version: 0.6.0
     host: http://drone-127.0.0.1.sslip.io:30980
@@ -30,9 +30,9 @@ argocd:
     versio: 0.8.0
     logLevel: debug
     registries:
-      - name: "nexus.infra"
-        prefix: "nexus.infra:18081"
-        api_url: "http://nexus.infra:18081"
+      - name: "nexus.infra.svc.cluster.local"
+        prefix: "nexus.infra.svc.cluster.local:18081"
+        api_url: "http://nexus.infra.svc.cluster.local:18081"
         default: true
         defaultns: example
         insecure: true

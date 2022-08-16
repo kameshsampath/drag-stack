@@ -3,11 +3,12 @@ kind: Kustomization
 
 namespace: infra
 
-resources:
-  - https://github.com/kameshsampath/kube-dev-utils//nexus3?ref=main
-
 generatorOptions:
   disableNameSuffixHash: true
+
+resources:
+  - https://github.com/kameshsampath/kube-dev-utils//nexus3?ref=main
+  - argocd-img-updater-rbac.yaml
 
 configMapGenerator:
   - name: nexus3-config
