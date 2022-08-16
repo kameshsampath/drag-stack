@@ -11,7 +11,7 @@ configMapGenerator:
     behavior: merge
     literals:
       - "NEXUS_URL=http://nexus.infra.svc.cluster.local:8081"
-      - "ANONYMOUS_ACCESS=false"
+      - "ANONYMOUS_ACCESS=true"
       - "NEXUS_NS=infra"
       - "NEXUS_DEPLOYMENT=nexus3"
 
