@@ -6,6 +6,9 @@ namespace: infra
 resources:
   - https://github.com/kameshsampath/kube-dev-utils//nexus3?ref=main
 
+generatorOptions:
+  disableNameSuffixHash: true
+
 configMapGenerator:
   - name: nexus3-config
     behavior: merge
