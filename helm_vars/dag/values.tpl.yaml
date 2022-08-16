@@ -36,5 +36,3 @@ argocd:
         default: true
         defaultns: example
         insecure: true
-registry:
-  enabled: false
