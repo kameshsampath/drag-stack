@@ -37,11 +37,11 @@ k3d cluster create -c "$SCRIPT_DIR/k3s-cluster-config.yaml"
 ## sanity checks
 
 # Docker push
-docker pull gcr.io/google-samples/hello-app:1.0
-docker tag gcr.io/google-samples/hello-app:1.0 "${REGISTRY_NAME}:5001/hello-app:1.0"
-docker push "${REGISTRY_NAME}:5001/hello-app:1.0"
+# docker pull gcr.io/google-samples/hello-app:1.0
+# docker tag gcr.io/google-samples/hello-app:1.0 "${REGISTRY_NAME}:5001/hello-app:1.0"
+# docker push "${REGISTRY_NAME}:5001/hello-app:1.0"
 
 # kubectl 
-kubectl create deployment hello-server --image="${REGISTRY_NAME}:5000/hello-app:1.0"
-kubectl rollout status deployment.apps/hello-server --timeout=30s
-kubectl delete deployment.apps/hello-server
+# kubectl create deployment hello-server --image="${REGISTRY_NAME}:5000/hello-app:1.0"
+# kubectl rollout status deployment.apps/hello-server --timeout=30s
+# kubectl delete deployment.apps/hello-server
