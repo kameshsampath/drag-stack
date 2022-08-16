@@ -27,17 +27,18 @@ ports:
     nodeFilters:
      - loadbalancer
 registries:
-  create:
-      name: "${REGISTRY_NAME}"
-      host: "0.0.0.0"
-      hostPort: "5001"
-      volumes:
-        - "/Users/kameshs/MyLabs/.k3s/registry:/var/lib/registry"
-#  config: |
-#      mirrors:
-#        "docker.io":
-#           endpoint:
-#             - "http://k3d-docker-io-proxy:5100"
-#        "quay.io":
-#           endpoint:
-#             - "http://k3d-quay-io-proxy:5200"
+  # create:
+  #     name: "${REGISTRY_NAME}"
+  #     host: "0.0.0.0"
+  #     hostPort: "5001"
+  #     volumes:
+  #       - "/Users/kameshs/MyLabs/.k3s/registry:/var/lib/registry"
+  config: |
+     mirrors:
+       "nexus.infra.svc.cluster.local:18081":
+          endpoint:
+            - "http://nexus.infra.svc.cluster.local:18081"
+       "nexus.infra.svc.cluster.local:18081":
+          auth:
+            username: admin
+            password: admin123
