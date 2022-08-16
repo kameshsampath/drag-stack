@@ -20,7 +20,7 @@ drone:
     host: http://drone-127.0.0.1.sslip.io:30980
     namespace: drone
     hostAliases:
-      - ip: 10.43.142.127
+      - ip: 
         hostnames:
           - gitea-127.0.0.1.sslip.io
     admin:
@@ -36,5 +36,4 @@ argocd:
         default: true
         defaultns: example
         insecure: true
-registry:
-  enabled: true
+        credentials: "secret:infra/nexus3-configt#creds"
