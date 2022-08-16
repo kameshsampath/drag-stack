@@ -32,7 +32,7 @@ SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
 envsubst < "$SCRIPT_DIR/k3s-cluster-config.yaml.tpl" > "$SCRIPT_DIR/k3s-cluster-config.yaml"
 
-k3d cluster create -c "$SCRIPT_DIR/k3s-cluster-config.yaml"
+k3d cluster create -c "$SCRIPT_DIR/k3s-cluster-config.yaml" --registry-config "$SCRIPT_DIR/registries.yaml"
 
 ## sanity checks
 

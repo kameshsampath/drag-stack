@@ -26,19 +26,3 @@ ports:
   - port: 127.0.0.1:31081:31081
     nodeFilters:
      - loadbalancer
-registries:
-  # create:
-  #     name: "${REGISTRY_NAME}"
-  #     host: "0.0.0.0"
-  #     hostPort: "5001"
-  #     volumes:
-  #       - "/Users/kameshs/MyLabs/.k3s/registry:/var/lib/registry"
-  config: |
-     mirrors:
-       "nexus.infra.svc.cluster.local:18081":
-          endpoint:
-            - "http://nexus.infra.svc.cluster.local:18081"
-       "nexus.infra.svc.cluster.local:18081":
-          auth:
-            username: admin
-            password: admin123
