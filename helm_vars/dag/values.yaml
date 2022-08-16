@@ -31,8 +31,8 @@ argocd:
     logLevel: debug
     registries:
       - name: "nexus.infra.svc.cluster.local"
-        prefix: "nexus.infra.svc.cluster.local:31081"
-        api_url: "http://nexus.infra.svc.cluster.local:31081"
+        prefix: "nexus.infra.svc.cluster.local"
+        api_url: "http://nexus.infra.svc.cluster.local"
         default: true
         defaultns: example
         insecure: true

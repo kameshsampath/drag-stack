@@ -39,7 +39,7 @@ spec:
             - "1450"
           env:
             - name: MY_REGISTRY_URL
-              value: "${REGISTRY_NAME}:${REGISTRY_PORT}"
+              value: "${REGISTRY_NAME}"
           envFrom:
             - secretRef:
                 name: registry-config
@@ -56,7 +56,7 @@ spec:
             - name: DOCKER_HOST
               value: tcp://localhost:2375
             - name: MY_REGISTRY_URL
-              value: "${REGISTRY_NAME}:${REGISTRY_PORT}"
+              value: "${REGISTRY_NAME}"
           envFrom:
             - secretRef:
                 name: registry-config

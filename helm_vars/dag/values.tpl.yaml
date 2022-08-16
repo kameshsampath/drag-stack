@@ -14,7 +14,7 @@ drone:
   docker:
     runner:
       insecureRegistries:
-        - "${REGISTRY_NAME}:${REGISTRY_PORT}"
+        - "${REGISTRY_NAME}"
   server:
     version: 0.6.0
     host: ${DRONE_SERVER_URL}
@@ -31,9 +31,11 @@ argocd:
     logLevel: debug
     registries:
       - name: "${REGISTRY_NAME}"
-        prefix: "${REGISTRY_NAME}:${REGISTRY_PORT}"
-        api_url: "http://${REGISTRY_NAME}:${REGISTRY_PORT}"
+        prefix: "${REGISTRY_NAME}"
+        api_url: "http://${REGISTRY_NAME}"
         default: true
         defaultns: example
         insecure: true
         credentials: "secret:infra/${NEXUS_ADMIN_CREDENTIALS_SECRET}#creds"
+registry:
+  enabled: false

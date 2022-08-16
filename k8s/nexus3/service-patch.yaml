@@ -4,7 +4,7 @@
     name: nexus-registry-port
     nodePort: 31081
     protocol: TCP
-    port: 18081
+    port: 80
     targetPort: 18081
 - op: replace
   path: "/spec/ports/0"
