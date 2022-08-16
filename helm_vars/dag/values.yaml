@@ -12,7 +12,7 @@ gitea:
   password: user-01@123
 drone:
   docker:
-    runner: 
+    runner:
       insecureRegistries:
         - "nexus.infra:18081"
   server:

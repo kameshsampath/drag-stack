@@ -18,6 +18,7 @@ configMapGenerator:
   - name: scripts
     files:
       - "test.sh"
+      - "Dockerfile"
 
 secretGenerator:
   - name: registry-config

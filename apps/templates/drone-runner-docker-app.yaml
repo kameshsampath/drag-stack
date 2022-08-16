@@ -31,13 +31,16 @@ spec:
         hostAliases:
           {{- toYaml . | nindent 10 }}
         {{- end }}
-        dindCommandArgs:
-          - --host
-          - tcp://127.0.0.1:2375
-          {{- range .Values.drone.docker.runner.insecureRegistries }}
-          - --insecure-registry
-          - {{ . }}
-          {{- end }}
+        dind:
+         commandArgs:
+            - --host
+            - tcp://localhost:2375
+            {{- range .Values.drone.docker.runner.insecureRegistries }}
+            - --insecure-registry
+            - {{ . }}
+            {{- end }}
+            - --mtu
+            - {{ .Values.drone.docker.runner.mtu }}
         extraSecretNamesForEnvFrom:
           # all the other as $PROJECT_HOME/k8s/.env variables are loaded via this secret
           # https://docs.drone.io/server/reference/

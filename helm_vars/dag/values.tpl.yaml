@@ -12,7 +12,7 @@ gitea:
   password: ${GITEA_USER}@123
 drone:
   docker:
-    runner: 
+    runner:
       insecureRegistries:
         - "${REGISTRY_NAME}:${REGISTRY_PORT}"
   server:
