@@ -23,6 +23,8 @@ spec:
               - key: test.sh
                 path: test.sh
                 mode: 0755
+              - key: Dockerfile
+                path: Dockerfile
       containers:
         - name: docker-dind
           image: docker:20-dind
@@ -31,14 +33,16 @@ spec:
             - "dockerd"
           args:
             - "--host"
-            - "tcp://127.0.0.1:2375"
+            - "tcp://localhost:2375"
             - "--insecure-registry=$(MY_REGISTRY_URL)"
-            - "--insecure-registry=$(MY_REGISTRY_EXTERNAL_URL)"
+            - "--mtu"
+            - "1450"
           env:
-            - name: MY_REGISTRY_EXTERNAL_URL
-              value: "my-registry.${TRAEFIK_LOADBALANCER_IP}.sslip.io:5000"
             - name: MY_REGISTRY_URL
-              value: "my-registry.example.com:5000"
+              value: "${REGISTRY_NAME}"
+          envFrom:
+            - secretRef:
+                name: registry-config
           securityContext:
             privileged: true
           volumeMounts:
@@ -46,15 +50,16 @@ spec:
               mountPath: /var/lib/docker
               subPath: docker
         - name: tools
-          image: kameshsampath/kube-dev-tools:v0.0.4
+          image: kameshsampath/kube-dev-tools:v0.0.6
           imagePullPolicy: IfNotPresent
           env:
             - name: DOCKER_HOST
               value: tcp://localhost:2375
-            - name: MY_REGISTRY_EXTERNAL_URL
-              value: "my-registry.${TRAEFIK_LOADBALANCER_IP}.sslip.io:5000"
             - name: MY_REGISTRY_URL
-              value: "my-registry.example.com:5000"
+              value: "${REGISTRY_NAME}"
+          envFrom:
+            - secretRef:
+                name: registry-config
           command:
             - tail
             - -f

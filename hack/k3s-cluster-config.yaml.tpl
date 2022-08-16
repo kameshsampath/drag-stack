@@ -3,25 +3,26 @@ kind: Simple
 metadata:
   name: dag
 servers: 1
-agents: 2
+# agents: 2
 image: rancher/k3s:v1.24.3-k3s1
 ports:
   # Drone CI
   - port: 127.0.0.1:30980:30980
     nodeFilters:
-      - agent:*
+      - loadbalancer
   # Gitea
   - port: 127.0.0.1:30950:30950
     nodeFilters:
-      - agent:*
+      - loadbalancer
   # Argo CD
   - port: 127.0.0.1:30080:30080
     nodeFilters:
-      - agent:*
-registries:
-  create:
-    name: "${REGISTRY_NAME}"
-    host: "0.0.0.0"
-    hostPort: "${REGISTRY_PORT}"
-    volumes:
-      - "${PWD}/.k3s/registry:/var/lib/registry"
+     - loadbalancer
+  # Nexus3 Repo Manager
+  - port: 127.0.0.1:30081:30081
+    nodeFilters:
+     - loadbalancer
+  # Nexus3 Container Registry
+  - port: 127.0.0.1:31081:31081
+    nodeFilters:
+     - loadbalancer

@@ -1,4 +1,0 @@
-resources:
-  - rbac-infra
-  - app
-  - rbac-kube-system

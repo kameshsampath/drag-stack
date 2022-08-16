@@ -1,7 +1,9 @@
 mirrors:
-  "my-registry.example.com:5000":
+  "nexus.infra.svc.cluster.local":
     endpoint:
-      - "http://${TRAEFIK_LOADBALANCER_IP}:5000"
+      - "${REGISTRY_SERVICE_ENDPOINT}"
 configs:
-  "my-registry.example.com:5000":
-      insecure_skip_verify: true
+  "nexus.infra.svc.cluster.local":
+    auth:
+      username: admin
+      password: admin123

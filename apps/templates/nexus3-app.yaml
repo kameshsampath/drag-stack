@@ -1,52 +1,27 @@
+{{- if .Values.registry.enabled -}}
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: drone-kube-runner
+  name: nexus3
   namespace: argocd
   # Add this finalizer ONLY if you want these to cascade delete.
   finalizers:
     - resources-finalizer.argocd.argoproj.io
   labels:
-    name: drone-runner-kube
+    name: nexus3
 spec:
   project: dag-project
   source:
-    # Can point to either a Helm chart repo or a git repo.
+    repoURL: {{ .Values.source.repoURL }}
+    targetRevision: {{ .Values.source.targetRevision }}
+    path: k8s/nexus3
 
-    # Using the Charts Repo
-    repoURL: https://charts.drone.io 
-    targetRevision: {{ .Values.drone.kube.runner.version }} 
-    chart: drone-runner-kube  
-
-    # Using Git Repo this has patch for hostAliases
-    # TODO: set to official repo once the PR is merged
-    # repoURL: https://github.com/kameshsampath/drone-charts.git  
-    # targetRevision:  {{ .Values.drone.server.version }}
-    # path: charts/drone-runner-kube
-
-    helm:
-      releaseName: drone-runner-kube
-      # TODO move to public repo in case you want to use values file 
-      # over the inline values
-      # valueFiles:
-      # - values-prod.yaml
-      values: |
-        extraSecretNamesForEnvFrom:
-          # all the other as $PROJECT_HOME/k8s/.env variables are loaded via this secret
-          # https://docs.drone.io/server/reference/
-          - {{ .Values.gitea.oAuthSecret }}
-        env:
-          DRONE_RPC_HOST: "drone:30980"
-
-      # Optional Helm version to template with. If omitted it will fall back to look at the 'apiVersion' in Chart.yaml
-      # and decide which Helm binary to use automatically. This field can be either 'v2' or 'v3'.
-      version: v3
-
-  # Destination cluster and namespace to deploy the application
+    # any kustomize transformation
+    # kustomize:
+  
   destination:
     server: {{ .Values.destination.server }}
-    # The namespace will only be set for namespace-scoped resources that have not set a value for .metadata.namespace
-    namespace: {{ .Values.drone.server.namespace }}
+    namespace: infra
 
   # Sync policy
   syncPolicy:
@@ -80,3 +55,4 @@ spec:
     kind: "*"
     managedFieldsManagers:
     - kube-controller-manager
+{{- end }}

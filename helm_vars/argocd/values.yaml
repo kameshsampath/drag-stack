@@ -1,4 +1,6 @@
 global:
+  image:
+    tag: "v2.4.9"
   hostAliases:
    - ip: "${GITEA_HTTP_CLUSTER_IP}"
      hostnames:

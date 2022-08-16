@@ -28,7 +28,9 @@ drone:
       version: 0.1.10
   docker:
     runner:
-      version: 0.1.0
+      version: 0.3.0
+      insecureRegistries: []
+      mtu: "1450"
   # Drone Helm Chart settings
   server:
     # the chart version
@@ -45,10 +47,10 @@ drone:
       #   - gitea-127.0.0.1.sslip.io
     admin:
       enable: false
-artifactory:
-  enabled: false
 argocd:
   imageUpdater:
     version: 0.8.0
     logLevel: info
     registries: []
+registry:
+  enabled: true

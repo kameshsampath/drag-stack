@@ -1,48 +1,61 @@
-{{- if .Values.artifactory.enabled }}
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: artifactory
+  name: drone-docker-runner
   namespace: argocd
   # Add this finalizer ONLY if you want these to cascade delete.
   finalizers:
     - resources-finalizer.argocd.argoproj.io
   labels:
-    name: artifactory
+    name: drone-docker-runner
 spec:
   project: dag-project
   source:
+    # Can point to either a Helm chart repo or a git repo.
+
     # Using the Charts Repo
-    repoURL: https://charts.jfrog.io 
-    targetRevision: 107.41.7
-    chart: artifactory-oss 
+    repoURL: https://charts.drone.io 
+    targetRevision: {{ .Values.drone.docker.runner.version }} 
+    chart: drone-runner-docker  
+
+    # Using Git Repo this has patch for hostAliases
+    # TODO: set to official repo once the PR is merged
+    # repoURL: https://github.com/kameshsampath/drone-charts.git  
+    # targetRevision:  dind-command-improvements 
+    # path: charts/drone-runner-docker  
 
     helm:
-      releaseName: artifactory
+      releaseName: drone-runner-docker
       values: |
-        artifactory:
-          nginx:
-            enabled: false
-          postgresql:
-            enabled: false
-          resources:
-            requests:
-              memory: "1Gi"
-              cpu: "500m"
-            limits:
-              memory: "4Gi"
-              cpu: "1"
-          javaOpts:
-            xms: "1g"
-            xmx: "3g"
-        postgresql:
-          enabled: false
-        fullnameOverride: "artifactory-oss"
-        version: v3
+        {{- with .Values.drone.server.hostAliases }}
+        hostAliases:
+          {{- toYaml . | nindent 10 }}
+        {{- end }}
+        dind:
+         commandArgs:
+            - --host
+            - tcp://localhost:2375
+            {{- range .Values.drone.docker.runner.insecureRegistries }}
+            - --insecure-registry
+            - {{ . }}
+            {{- end }}
+            - "--mtu={{ .Values.drone.docker.runner.mtu }}"
+        extraSecretNamesForEnvFrom:
+          # all the other as $PROJECT_HOME/k8s/.env variables are loaded via this secret
+          # https://docs.drone.io/server/reference/
+          - {{ .Values.gitea.oAuthSecret }}
+        env:
+          DRONE_RPC_HOST: "drone:30980"
 
+      # Optional Helm version to template with. If omitted it will fall back to look at the 'apiVersion' in Chart.yaml
+      # and decide which Helm binary to use automatically. This field can be either 'v2' or 'v3'.
+      version: v3
+
+  # Destination cluster and namespace to deploy the application
   destination:
     server: {{ .Values.destination.server }}
-    namespace: infra
+    # The namespace will only be set for namespace-scoped resources that have not set a value for .metadata.namespace
+    namespace: {{ .Values.drone.server.namespace }}
 
   # Sync policy
   syncPolicy:
@@ -76,4 +89,3 @@ spec:
     kind: "*"
     managedFieldsManagers:
     - kube-controller-manager
-{{- end }}
