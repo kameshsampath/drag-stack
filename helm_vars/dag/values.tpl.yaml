@@ -36,4 +36,4 @@ argocd:
         default: true
         defaultns: example
         insecure: true
-        credentials: "secret:infra/nexus3-config#creds"
+        credentials: "secret:infra/${NEXUS_ADMIN_CREDENTIALS_SECRET}#creds"
