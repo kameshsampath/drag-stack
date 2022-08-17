@@ -25,10 +25,8 @@ gitea:
       PROTOCOL: http
       # the port gitea will listen on
       HTTP_PORT: 30950
-      # the Git domain - all the repositories will be using this domain
-      DOMAIN: ${GITEA_DOMAIN}
       # The clone base url e.g. if repo is demo/foo the clone url will be 
-      # https://$GITEA_URL/demo/foo
+      # $GITEA_URL/demo/foo
       ROOT_URL: ${GITEA_URL}
     webhook:
       # since we will deploy to local network we will allow all hosts
