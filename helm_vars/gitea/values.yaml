@@ -29,8 +29,9 @@ gitea:
       # The clone base url e.g. if repo is demo/foo the clone url will be 
       # $GITEA_URL/demo/foo
       ROOT_URL: "${GITEA_URL}"
+      LOCAL_ROOT_URL: "https://gitea-127.0.0.1.sslip.io:30950"
     webhook:
       # since we will deploy to local network we will allow all hosts
       ALLOWED_HOST_LIST: "*"
-      # using instruqt domain and can skip TLS checks?
+      # lets not do tls checks for local 
       SKIP_TLS_VERIFY: true
