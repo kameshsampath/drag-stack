@@ -22,7 +22,7 @@ gitea:
   config:
     server:
       # for this demo we will use http protocol to access Git repos
-      PROTOCOL: https
+      PROTOCOL: http
       # the port gitea will listen on
       HTTP_PORT: 30950
       # the Git domain - all the repositories will be using this domain
