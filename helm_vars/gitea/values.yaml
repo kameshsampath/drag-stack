@@ -26,7 +26,6 @@ gitea:
       PROTOCOL: http
       # the port gitea will listen on
       HTTP_PORT: 30950
-      DOMAIN: kubernetes-vm
       # The clone base url e.g. if repo is demo/foo the clone url will be 
       # $GITEA_URL/demo/foo
       ROOT_URL: "${GITEA_URL}"
