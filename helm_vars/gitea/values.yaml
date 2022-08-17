@@ -7,7 +7,7 @@ service:
     # the Kubernetes service gitea-http'  service type
     type: NodePort 
     # the gitea-http service port
-    port: 3000
+    port: 30950
     # this port will be used in port mappings to allow accessing the 
     # Gitea server from our laptops
     nodePort: 30950
@@ -25,7 +25,8 @@ gitea:
       # for this demo we will use http protocol to access Git repos
       PROTOCOL: http
       # the port gitea will listen on
-      HTTP_PORT: 3000
+      HTTP_PORT: 30950
+      DOMAIN: kubernetes-vm
       # The clone base url e.g. if repo is demo/foo the clone url will be 
       # $GITEA_URL/demo/foo
       ROOT_URL: "${GITEA_URL}"
