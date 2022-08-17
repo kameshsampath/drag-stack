@@ -7,8 +7,8 @@ service:
     # the Kubernetes service gitea-http'  service type
     type: NodePort 
     # the gitea-http service port
-    port: 30950
-    # this port will be used in KinD extra port mappings to allow accessing the 
+    port: 3000
+    # this port will be used in port mappings to allow accessing the 
     # Gitea server from our laptops
     nodePort: 30950
 gitea:
@@ -21,13 +21,16 @@ gitea:
     email: admin@example.com
   config:
     server:
+      DISABLE_SSH: true
       # for this demo we will use http protocol to access Git repos
-      PROTOCOL: http
+      PROTOCOL: https
       # the port gitea will listen on
-      HTTP_PORT: 30950
+      HTTP_PORT: 3000
       # The clone base url e.g. if repo is demo/foo the clone url will be 
       # $GITEA_URL/demo/foo
-      ROOT_URL: "https://${GITEA_DOMAIN}"
+      ROOT_URL: "${GITEA_URL}"
+      REDIRECT_OTHER_PORT: true
+      PORT_TO_REDIRECT: 30950
     webhook:
       # since we will deploy to local network we will allow all hosts
       ALLOWED_HOST_LIST: "*"
