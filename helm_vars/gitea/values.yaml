@@ -33,5 +33,5 @@ gitea:
     webhook:
       # since we will deploy to local network we will allow all hosts
       ALLOWED_HOST_LIST: "*"
-      # since we are in http mode disable TLS
-      # SKIP_TLS_VERIFY: true
+      # using instruqt domain and can skip TLS checks?
+      SKIP_TLS_VERIFY: true
