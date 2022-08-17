@@ -27,7 +27,7 @@ gitea:
       HTTP_PORT: 30950
       # The clone base url e.g. if repo is demo/foo the clone url will be 
       # $GITEA_URL/demo/foo
-      ROOT_URL: ${GITEA_URL}
+      ROOT_URL: "https://${GITEA_DOMAIN}"
     webhook:
       # since we will deploy to local network we will allow all hosts
       ALLOWED_HOST_LIST: "*"
