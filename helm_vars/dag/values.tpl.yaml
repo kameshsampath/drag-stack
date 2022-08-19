@@ -19,12 +19,12 @@ drone:
     version: 0.6.0
     host: ${DRONE_SERVER_URL}
     namespace: drone
-    hostAliases:
-      - ip: ${GITEA_HTTP_CLUSTER_IP}
-        hostnames:
-          - ${GITEA_DOMAIN}
-    admin:
-      enable: ${ENABLE_DRONE_ADMIN}
+    # hostAliases:
+    #   - ip: ${GITEA_HTTP_CLUSTER_IP}
+    #     hostnames:
+    #       - ${GITEA_DOMAIN}
+    # admin:
+    #   enable: ${ENABLE_DRONE_ADMIN}
 argocd:
   imageUpdater:
     versio: 0.8.0
