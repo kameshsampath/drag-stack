@@ -20,5 +20,3 @@ data:
         repos:
           - https://github.com/kameshsampath/dag-stack.git
           - https://github.com/kameshsampath/drone-quickstart.git
-          - https://github.com/kameshsampath/quarkus-springboot-demo.git
-          - https://github.com/kameshsampath/quarkus-springboot-demo-gitops.git
