@@ -2,8 +2,6 @@
 
 set -euxo pipefail
 
-direnv allow .
-
 # Deploy Gitea
 helm repo add gitea-charts https://dl.gitea.io/charts/
 helm repo update
