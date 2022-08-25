@@ -1,6 +1,6 @@
 apiVersion: v2
-name: dag
-description: DAG ArgoCd Application
+name: drag
+description: Drone Registry Argo CD and Git
 
 # A chart can be either an 'application' or a 'library' chart.
 #

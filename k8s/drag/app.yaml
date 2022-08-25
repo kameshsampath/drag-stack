@@ -1,22 +1,22 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: dag-apps
+  name: drag-apps
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
   labels:
-    name: dag
+    name: drag
 spec:
   project: default
   source:
-    repoURL: ${GITEA_DAG_REPO}
-    targetRevision:  ${DAG_TARGET_VERSION}
+    repoURL: ${GITEA_DRAG_REPO}
+    targetRevision:  ${DRAG_TARGET_VERSION}
     path: apps
     helm:
-      releaseName: dag-apps
+      releaseName: drag-apps
       valueFiles:
-       - ../helm_vars/dag/values.yaml
+       - ../helm_vars/drag/values.yaml
       version: v3
 
   # Destination cluster and namespace to deploy the application

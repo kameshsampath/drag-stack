@@ -28,7 +28,7 @@ done
 
 ORIGIN_URL=$(git remote get-url --push origin)
 
-if [ "$ORIGIN_URL" != "${GITEA_DAG_REPO}" ];
+if [ "$ORIGIN_URL" != "${GITEA_DRAG_REPO}" ];
 then
-  printf "\dag repository has wrong origin %s instead of %s\n" "${ORIGIN_URL}"  "${GITEA_DAG_REPO}"
+  printf "\drag repository has wrong origin %s instead of %s\n" "${ORIGIN_URL}"  "${GITEA_DRAG_REPO}"
 fi

@@ -44,7 +44,7 @@ EOF
 Append ports (if not)
 
 ```shell
-k3d cluster edit dag --port-add 127.0.0.1:31081:31081
+k3d cluster edit drag --port-add 127.0.0.1:31081:31081
 ```
 
 Login to registry,

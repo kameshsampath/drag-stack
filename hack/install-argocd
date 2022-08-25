@@ -15,7 +15,7 @@ export GITEA_HTTP_CLUSTER_IP
   --values - \
   --wait
 
-envsubst < "$DRAG_HOME/helm_vars/dag/values.tpl.yaml" > "$DRAG_HOME/helm_vars/dag/values.yaml"
+envsubst < "$DRAG_HOME/helm_vars/drag/values.tpl.yaml" > "$DRAG_HOME/helm_vars/drag/values.yaml"
 
 # Add/Update origin
 pushd "$DRAG_HOME"
@@ -25,17 +25,17 @@ PUSH_GITEA_URL="http://${GITEA_USER}:user-01%40123@host.docker.internal:30950"
 
 git add .
 git commit -a -m "Init DRAG"
-git push "${PUSH_GITEA_URL}/${GITEA_USER}/drag-stack.git" "${DAG_TARGET_VERSION}"
+git push "${PUSH_GITEA_URL}/${GITEA_USER}/drag-stack.git" "${DRAG_TARGET_VERSION}"
 popd 
 
-envsubst < "$DRAG_HOME/k8s/dag/app.yaml" | kubectl apply -f -
+envsubst < "$DRAG_HOME/k8s/drag/app.yaml" | kubectl apply -f -
 
 argocd login --plaintext "host.docker.internal:30080" \
   --insecure \
   --username "${ARGO_ADMIN_USER}" \
   --password="${ARGO_ADMIN_PASSWORD}"
 
-argocd app sync --assumeYes --timeout=600 dag-apps
+argocd app sync --assumeYes --timeout=600 drag-apps
 
 # wait for drone to be ready
 kubectl rollout status -n drone deploy/drone --timeout=120s

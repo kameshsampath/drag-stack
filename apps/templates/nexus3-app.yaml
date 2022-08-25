@@ -10,7 +10,7 @@ metadata:
   labels:
     name: nexus3
 spec:
-  project: dag-project
+  project: drag-project
   source:
     repoURL: {{ .Values.source.repoURL }}
     targetRevision: {{ .Values.source.targetRevision }}

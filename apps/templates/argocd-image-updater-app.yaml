@@ -9,7 +9,7 @@ metadata:
   labels:
     name: argocd-image-updater
 spec:
-  project: dag-project
+  project: drag-project
   source:
 
     # Using the Charts Repo

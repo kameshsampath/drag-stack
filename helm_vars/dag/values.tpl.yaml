@@ -1,8 +1,8 @@
 destination:
   server: https://kubernetes.default.svc
 source:
-  repoURL: ${GITEA_URL}/${GITEA_USER}/dag.git
-  targetRevision: ${DAG_TARGET_VERSION}
+  repoURL: ${GITEA_URL}/${GITEA_USER}/drag.git
+  targetRevision: ${DRAG_TARGET_VERSION}
 gitea:
   server:
     outClusterURL: ${GITEA_URL}

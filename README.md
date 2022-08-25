@@ -28,7 +28,7 @@ All linux distributions adds **envsubst** via [gettext](https://www.gnu.org/soft
 ## Clone the Sources
 
 ```shell
-git clone https://github.com/kameshsampath/dag-stack && \
+git clone https://github.com/kameshsampath/drag-stack && \
   cd "$(basename "$_" .git)" && direnv allow .
 ```
 
@@ -62,7 +62,7 @@ You can now access Argo CD in your browser using the url <http://argocd-127.0.0.
 
 ## Cluster Bootstrapping
 
-The cluster bootstrapping  that we did in earlier step installs the core DAG stack applications ([App of Apps](https://argo-cd.readthedocs.io/en/stable/operator-manual/declarative-setup/#app-of-apps)) and DAG stack has the following child applications,
+The cluster bootstrapping  that we did in earlier step installs the core DRAG stack applications ([App of Apps](https://argo-cd.readthedocs.io/en/stable/operator-manual/declarative-setup/#app-of-apps)) and DRAG stack has the following child applications,
 
 - Argo CD Image Updater
 - Drone Server
@@ -71,7 +71,7 @@ The cluster bootstrapping  that we did in earlier step installs the core DAG sta
 
 A successful ArgoCD Deployment of Drone should look as shown below,
 
-![ArgoCD Apps](./docs/images/dag_apps.png)
+![ArgoCD Apps](./docs/images/drag_apps.png)
 
 You can now access Drone CI in your browser using the url <http://drone-127.0.0.1.sslip.io:30080>.
 
@@ -96,7 +96,7 @@ What we have done until now,
 
 - Setup Gitea
 - Setup Argo CD
-- Setup `dag-apps` Argo CD that in turn setup
+- Setup `drag-apps` Argo CD that in turn setup
   - Drone Server
   - Drone Kube Runner
   - Drone Docker Runner

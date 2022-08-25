@@ -12,7 +12,7 @@ metadata:
   labels:
     name: drone
 spec:
-  project: dag-project
+  project: drag-project
   source:
     # Can point to either a Helm chart repo or a git repo.
 
