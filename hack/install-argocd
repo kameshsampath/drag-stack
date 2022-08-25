@@ -22,7 +22,10 @@ git push origin "${DAG_TARGET_VERSION}"
 
 envsubst < "$DAG_HOME/k8s/dag/app.yaml" | kubectl apply -f -
 
-argocd login --plaintext "${ARGOCD_SERVER_HOST}" --insecure --username admin --password='demo@123' 
+argocd login --plaintext "${ARGOCD_SERVER_HOST}" \
+  --insecure \
+  --username "${ARGO_ADMIN_USER}" \
+  --password="${ARGO_ADMIN_PASSWORD}"
 
 argocd app sync --assumeYes --timeout=600 dag-apps
 
