@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -euxo pipefail
+set -euo pipefail
 
 # Deploy Gitea
 helm repo add gitea-charts https://dl.gitea.io/charts/
