@@ -21,7 +21,7 @@ envsubst < "$DRAG_HOME/helm_vars/dag/values.tpl.yaml" > "$DRAG_HOME/helm_vars/da
 pushd "$DRAG_HOME"
 git config --global user.email "${GITEA_USER}@example.com"
 git config --global user.name "${GITEA_USER}"
-PUSH_GITEA_URL="http://${GITEA_USER}:${GITEA_USER_PASSWORD}@k3d-${K3D_CLUSTER_NAME}-serverlb:30950"
+PUSH_GITEA_URL="http://${GITEA_USER}:user-01%40123@k3d-${K3D_CLUSTER_NAME}-serverlb:30950"
 
 git add .
 git commit -a -m "Init DRAG"
