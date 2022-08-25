@@ -14,7 +14,3 @@ helm upgrade \
 # Create the default user ${GITEA_USER} and configure the user with default git repos
 kubectl apply -k "$GITEA_CONFIG_MANIFESTS_PATH"
 kubectl wait --for=condition=complete --timeout=60s -n drone job/workshop-setup
-
-
-git config --global user.email "${GITEA_USER}@example.com"
-git config --global user.name "${GITEA_USER}"
