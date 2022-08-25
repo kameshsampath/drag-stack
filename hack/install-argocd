@@ -25,7 +25,7 @@ PUSH_GITEA_URL="http://${GITEA_USER}:user-01%40123@host.docker.internal:30950"
 
 git add .
 git commit -a -m "Init DRAG"
-git push "${PUSH_GITEA_URL}/drag-stack.git" "${DAG_TARGET_VERSION}"
+git push "${PUSH_GITEA_URL}/${GITEA_USER}/drag-stack.git" "${DAG_TARGET_VERSION}"
 popd 
 
 envsubst < "$DRAG_HOME/k8s/dag/app.yaml" | kubectl apply -f -
