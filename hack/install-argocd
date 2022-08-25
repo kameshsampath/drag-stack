@@ -19,16 +19,13 @@ envsubst < "$DRAG_HOME/helm_vars/dag/values.tpl.yaml" > "$DRAG_HOME/helm_vars/da
 
 # Add/Update origin
 pushd "$DRAG_HOME"
-
-git config credential.helper store
 git config --global user.email "${GITEA_USER}@example.com"
 git config --global user.name "${GITEA_USER}"
+PUSH_GITEA_URL="http://${GITEA_USER}:${GITEA_USER_PASSWORD}@k3d-${K3D_CLUSTER_NAME}-serverlb:30950"
 
-printf 'http://%s:%s@%s' "${GITEA_USER}" "${GITEA_USER_PASSWORD}" "k3d-${K3D_CLUSTER_NAME}-serverlb:30950" > "$HOME/.git-credentials"
-git remote add dev "http://k3d-${K3D_CLUSTER_NAME}-serverlb:30950/${GITEA_USER}/drag-stack.git"
 git add .
 git commit -a -m "Init DRAG"
-git push dev "${DAG_TARGET_VERSION}"
+git push "${PUSH_GITEA_URL}/drag-stack.git" "${DAG_TARGET_VERSION}"
 popd 
 
 envsubst < "$DRAG_HOME/k8s/dag/app.yaml" | kubectl apply -f -
