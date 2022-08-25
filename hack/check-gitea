@@ -32,3 +32,6 @@ if [ "$ORIGIN_URL" != "${GITEA_DAG_REPO}" ];
 then
   printf "\dag repository has wrong origin %s instead of %s\n" "${ORIGIN_URL}"  "${GITEA_DAG_REPO}"
 fi
+
+git config --global user.email "user-01@example.com"
+git config --global user.name "User 01"
