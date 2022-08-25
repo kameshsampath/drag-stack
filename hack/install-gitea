@@ -8,7 +8,7 @@ helm repo update
 
 helm upgrade \
   --install gitea gitea-charts/gitea \
-  --values "$DAG_HOME/helm_vars/gitea/values.yaml" \
+  --values "$DRAG_HOME/helm_vars/gitea/values.yaml" \
   --wait
 
 # Create the default user user-01 and configure the user with default git repos

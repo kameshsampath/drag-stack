@@ -41,13 +41,13 @@ direnv allow .
 ## Create Kubernetes Cluster
 
 ```shell
-$DAG_HOME/hack/cluster.sh
+$DRAG_HOME/hack/cluster.sh
 ```
 
 ### Deploy Gitea
 
 ```shell
-$DAG_HOME/hack/install-gitea
+$DRAG_HOME/hack/install-gitea
 ```
 
 You can now access Gitea in your browser using the url <http://gitea-127.0.0.1.sslip.io:30950>. Default credentials `demo/demo@123`.
@@ -55,7 +55,7 @@ You can now access Gitea in your browser using the url <http://gitea-127.0.0.1.s
 ## Deploy ArgoCD
 
 ```shell
-$DAG_HOME/hack/install-argocd
+$DRAG_HOME/hack/install-argocd
 ```
 
 You can now access Argo CD in your browser using the url <http://argocd-127.0.0.1.sslip.io:30080>. Default credentials `admin/demo@123`.

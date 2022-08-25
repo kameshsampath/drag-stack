@@ -10,7 +10,7 @@ kubectl wait --for=condition=complete --timeout=120s -n drone job/workshop-setup
 
 mapfile -t git_remotes < <(git remote --no-verbose)
 
-printf "\n The '%s' has remotes '%s' \n" "${DAG_HOME}" "${git_remotes[*]}"
+printf "\n The '%s' has remotes '%s' \n" "${DRAG_HOME}" "${git_remotes[*]}"
 
 i=0
 for r in "${git_remotes[@]}"
