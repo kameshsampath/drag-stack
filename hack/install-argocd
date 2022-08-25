@@ -20,10 +20,10 @@ envsubst < "$DRAG_HOME/helm_vars/dag/values.tpl.yaml" > "$DRAG_HOME/helm_vars/da
 # Add/Update origin
 pushd "$DRAG_HOME"
 # rename to use the 
-git remote set-url origin "http://host.docker.internal:30950/${GITEA_USER}/drag-stack.git"
+git remote dev origin "http://host.docker.internal:30950/${GITEA_USER}/drag-stack.git"
 git add .
 git commit -a -m "Init DRAG"
-git push origin "${DAG_TARGET_VERSION}"
+git push dev "${DAG_TARGET_VERSION}"
 popd 
 
 envsubst < "$DRAG_HOME/k8s/dag/app.yaml" | kubectl apply -f -
