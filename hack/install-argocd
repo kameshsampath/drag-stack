@@ -19,6 +19,8 @@ envsubst < "$DRAG_HOME/helm_vars/dag/values.tpl.yaml" > "$DRAG_HOME/helm_vars/da
 
 # Add/Update origin
 pushd "$DRAG_HOME"
+git config user.email "${GITEA_USER}@example.com"
+git config user.name "${GITEA_USER}"
 # rename to use the 
 git remote add dev "http://host.docker.internal:30950/${GITEA_USER}/drag-stack.git"
 git add .
