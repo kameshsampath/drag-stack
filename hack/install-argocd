@@ -19,10 +19,10 @@ envsubst < "$DRAG_HOME/helm_vars/dag/values.tpl.yaml" > "$DRAG_HOME/helm_vars/da
 
 # Add/Update origin
 pushd "$DRAG_HOME"
-docker_internal_ip=$(docker inspect "k3d-${K3D_CLUSTER_NAME}-server-0" --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}')
+# docker_internal_ip=$(docker inspect "k3d-${K3D_CLUSTER_NAME}-server-0" --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}')
 git config user.email "${GITEA_USER}@example.com"
 git config user.name "${GITEA_USER}"
-git remote add dev "http://${docker_internal_ip}:30950/${GITEA_USER}/drag-stack.git"
+git remote add dev "http://k3d-lingua-greeter-serverlb:30950/${GITEA_USER}/drag-stack.git"
 git add .
 git commit -a -m "Init DRAG"
 git push dev "${DAG_TARGET_VERSION}"
