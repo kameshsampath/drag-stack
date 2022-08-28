@@ -1,7 +1,7 @@
 destination:
   server: https://kubernetes.default.svc
 source:
-  repoURL: http://gitea-127.0.0.1.sslip.io:30950/user-01/drag.git
+  repoURL: http://gitea-127.0.0.1.sslip.io:30950/user-01/drag-stack.git
   targetRevision: main
 gitea:
   server:
