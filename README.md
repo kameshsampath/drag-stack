@@ -44,4 +44,3 @@ Few applications that you can try with this stack,
 
 - <https://github.com/kameshsampath/quarkus-springboot-demo-gitops>
 - <https://github.com/kameshsampath/lingua-greeter-gitops>
-
