@@ -64,7 +64,7 @@ spec:
           # For this local setup and demo we wil run Drone in http mode
           DRONE_SERVER_PROTO: http
           {{- if .Values.drone.server.admin.enable }}
-          DRONE_USER_CREATE: username:{{ .Values.gitea.username }},admin:true
+          DRONE_USER_CREATE: username:{{ .Values.gitea.username }},machine:false,admin:true,token:{{ .Values.drone.user.token }}
           {{- end }}
 
       # Optional Helm version to template with. If omitted it will fall back to look at the 'apiVersion' in Chart.yaml
