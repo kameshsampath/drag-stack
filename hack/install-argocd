@@ -45,4 +45,4 @@ DRONE_SERVICE_IP="$(kubectl get svc -n drone drone -ojsonpath='{.spec.clusterIP}
 export DRONE_SERVICE_IP
 kubectl patch statefulset gitea -n default --patch "$(envsubst<$DRAG_HOME/k8s/gitea/patch.json)"
 
-kubectl rollout status -n default statefulset gitea --timeout=30s
+kubectl rollout status -n default statefulset gitea --timeout=120s
