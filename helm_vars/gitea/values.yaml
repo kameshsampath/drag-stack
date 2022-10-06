@@ -35,3 +35,5 @@ gitea:
       ALLOWED_HOST_LIST: "*"
       # since we are in http mode disable TLS
       SKIP_TLS_VERIFY: true
+    database:
+      DB_TYPE: sqlite3
