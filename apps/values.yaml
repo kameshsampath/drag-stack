@@ -35,8 +35,8 @@ drone:
     runner:
       version: 0.3.0
       insecureRegistries: []
-      # k3s clusters created using k3d sets the mtu to default 1400
-      mtu: "1400"
+      # k3s clusters created using k3d sets the mtu to default 1450
+      mtu: "1450"
   # Drone Helm Chart settings
   server:
     # the chart version
