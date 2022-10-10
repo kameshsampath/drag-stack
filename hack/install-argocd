@@ -37,6 +37,8 @@ argocd login --plaintext "host.docker.internal:30080" \
 
 argocd app sync --assumeYes --timeout=600 drag-apps
 
+sleep 15
+
 # wait for drone to be ready
 kubectl rollout status -n drone deploy/drone --timeout=120s
 
